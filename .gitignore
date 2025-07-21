@@ -1,4 +1,8 @@
 cub3D
-#*/*.o
+*/*.o
 *.a
 objs/*
+*.d
+.DS_Store
+*.swp
+.vscode/
