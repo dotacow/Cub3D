@@ -6,21 +6,19 @@ SRCDIR = src
 ODIR = ofiles
 LIBFTDIR = libft
 MLXDIR = MLX42
-# Source files:
-RENDER =
-PARSER =
-FILES = main.c
+# configuring source and object files:
+include Files.mk
 SRC = $(addprefix $(SRCDIR)/, $(FILES))
 OBJS = $(addprefix $(ODIR)/,$(FILES:.c=.o))
 # Dependencies
 DEPS = $(OBJS:.o=.d)
 # libraries
 LIBFT = $(LIBFTDIR)/libft.a
-MLX = $(MLXDIR)/libmlx42.a
+MLX = $(MLXDIR)/build/libmlx42.a
 # Executable name
 NAME = cub3D
 
-all: $(NAME) $(LIBFT) $(MLX)
+all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
@@ -37,7 +35,6 @@ $(LIBFT):
 $(MLX):
 	cmake -S$(MLXDIR) -B$(MLXDIR)/build
 	make -C $(MLXDIR)/build -j4
-
 
 clean:
 	make -C $(LIBFTDIR) clean
