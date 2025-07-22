@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/22 17:52:45 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/22 21:06:12 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,42 @@
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include "../MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
+/**
+ * @brief a cartesian point in 2D space
+ *
+ */
 typedef struct s_point
 {
 	float	x;
 	float	y;
 } t_point;
 
+/** @note :I dont know if this is actually needed, we'll see.
+ * @brief magnitude AND direction (⌐■_■)
+ * @param tail: the point from which the vector starts
+ * @param magnitude: the length of the vector
+ * @param theta: angle measured counter-clockwise from the positive x-axis
+ */
+typedef struct s_vector
+{
+	t_point	tail;
+	float	magnitude;
+	float	theta;
+} t_vector;
+
 /**
- * @brief: will contain the successfully validated map elements
- * @param map: flat matrix representing the map, p for padding,e for empty, w for wall.
+ * @brief: contains the successfully validated map elements
+ * @param map: flat matrix representing the map, p for padding, e for empty, w for wall.
  * @param north: north wall texture
  * @param south: south wall texture
  * @param west: west wall texture
  * @param east: east wall texture
- * @param:
- * @param:
+ * @param floor: floor color (ARGB)
+ * @param ceiling: ceiling color (ARGB)
+ * @param columns: number of columns in the map (after padding, uniform across rows.)
+ * @param rows: number of rows in the map (after padding, uniform across columns.)
  */
 typedef struct s_map_elements
 {
