@@ -6,18 +6,60 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/21 19:21:20 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:52:45 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#include <cstddef>
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/time.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+#include "../MLX42/include/MLX42/MLX42.h"
 
+typedef struct s_point
+{
+	float	x;
+	float	y;
+} t_point;
+
+/**
+ * @brief: will contain the successfully validated map elements
+ * @param map: flat matrix representing the map, p for padding,e for empty, w for wall.
+ * @param north: north wall texture
+ * @param south: south wall texture
+ * @param west: west wall texture
+ * @param east: east wall texture
+ * @param:
+ * @param:
+ */
+typedef struct s_map_elements
+{
+	unsigned int	floor;
+	unsigned int	ceiling;
+	char			*map;
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+	size_t			columns;
+	size_t			rows;
+} t_map_elements;
+
+/**
+ * @brief:the vector representing the camera pov
+ * @param theta: the current direction of the camera, initialized (by hamooz) to N,S,W,E
+ * @param position: the position
+ */
+typedef struct s_player
+{
+	float	theta;
+	t_point	position;
+} t_player;
 #endif
+
