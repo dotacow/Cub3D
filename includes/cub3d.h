@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 20:19:07 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:08:22 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define NMAPELEMENTS 8
+# define NMAPELEMENTS 7
 
 /**
  * @brief enums for the frequency array used to help map validation
@@ -38,7 +38,6 @@ typedef enum e_elements
 	EA,
 	FLOOR,
 	CEIL,
-	PLAYER,
 	MAP
 }	t_elements;
 
@@ -102,16 +101,26 @@ typedef struct s_player
 } t_player;
 
 /*########## PARSING FUNCTIONS ##########*/
-int		validate_args(int ac, char **av);
-int		is_valid_map(int fd);
+int			validate_args(int ac, char **av);
+int			is_valid_map(int fd);
 //parsing utils
-int		ft_isspace(char c);
-void	trim_whitespace(char *str);
-void	check_name(char *name);
+int			ft_isspace(char c);
+void		trim_whitespace(char *str);
+void		check_name(char *name);
+int			is_map_content(char *line);
 // frequency array utils
-void	init_found_arr(t_elements *found);
-int		is_all_found(t_elements *found);
-//readmodes
-t_elements		set_read_mode(char **keyval);
+void		init_found_arr(t_elements *found);
+int			is_all_found(t_elements *found);
+//validators
+int			set_validator(char **keyval);
+int			validate_no(char *val, t_elements *found);
+int			validate_so(char *val, t_elements *found);
+int			validate_we(char *val, t_elements *found);
+int			validate_ea(char *val, t_elements *found);
+int			validate_floor(char *val, t_elements *found);
+int			validate_ceil(char *val, t_elements *found);
+int			validate_player(char *val, t_elements *found);
+int			validate_map_content(char *line, t_elements *found, int fd);
+
 #endif
 

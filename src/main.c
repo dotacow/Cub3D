@@ -6,14 +6,13 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 18:48:13 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/24 22:21:20 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Written by Bruh
 
 #include "../includes/cub3d.h"
-// #include "../MLX42/include/MLX42/MLX42.h"
 
 #define WIDTH 256
 #define HEIGHT 256
