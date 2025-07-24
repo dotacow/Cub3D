@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   printf_functionsU.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/01 13:29:08 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 16:50:40 by hbelaih          ###   ########.fr       */
+/*   Created: 2025/01/01 12:35:40 by hbelaih           #+#    #+#             */
+/*   Updated: 2025/07/24 12:24:23 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+static void	put_unsigned(unsigned int n)
 {
-	unsigned int	first;
-	size_t			last;
-	char			*str;
+	if (n >= 10)
+		put_unsigned(n / 10);
+	ft_putchar((n % 10) + '0');
+}
 
-	first = 0;
-	last = ft_strlen(s1);
-	if (!s1 || !set)
-		return (NULL);
-	while (first <= ft_strlen(s1) && ft_strchr(set, s1[first]))
-		first++;
-	while (last > first && ft_strchr(set, s1[last - 1]))
-		last--;
-	str = ft_substr(s1, first, last - (size_t)first);
-	return (str);
+static int	unsigned_len(unsigned int num)
+{
+	int	n;
+
+	n = 0;
+	if (num == 0)
+		return (1);
+	while (num > 0)
+	{
+		n++;
+		num /= 10;
+	}
+	return (n);
+}
+
+int	print_unsigned(unsigned int num)
+{
+	put_unsigned(num);
+	return (unsigned_len(num));
 }

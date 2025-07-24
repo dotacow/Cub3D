@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/21 20:26:58 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:50:53 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Written by Bruh
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "../MLX42/include/MLX42/MLX42.h"
+#include "../includes/cub3d.h"
+// #include "../MLX42/include/MLX42/MLX42.h"
 
 #define WIDTH 256
 #define HEIGHT 256
@@ -35,17 +33,19 @@ static void ft_hook(void* param)
 	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
 }
 
-int32_t	main(void)
+
+int32_t	main(int ac, char **av)
 {
 
 	// MLX allows you to define its core behaviour before startup.
+	if (!validate_args(ac, av))
+		return (0);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "hello world ;p", true);
 	if (!mlx)
 		ft_error();
 
 	/* Do stuff */
-
 	// Create and display the image.
 	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
