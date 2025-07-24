@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 16:28:24 by yokitane          #+#    #+#             */
-/*   Updated: 2024/12/02 19:17:34 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 01:56:27 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_free(char **words, size_t reserved)
 	free(words);
 }
 
-static size_t	ft_count_words(char const *s, char c)
+size_t	ft_count_words(char const *s, char c)
 {
 	size_t	count;
 	size_t	i;

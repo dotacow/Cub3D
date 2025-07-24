@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/25 00:20:30 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 02:08:44 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			ft_isspace(char c);
 void		trim_whitespace(char *str);
 void		check_name(char *name);
 int			is_map_content(char *line);
+int			is_rgb_format(char *str);
 // frequency array utils
 void		init_found_arr(t_elements *found);
 int			is_all_found(t_elements *found);
@@ -120,6 +121,7 @@ int			validate_ea(char *val, t_elements *found);
 int			validate_floor(char *val, t_elements *found);
 int			validate_ceil(char *val, t_elements *found);
 int			validate_map_content(char *line, t_elements *found, int fd);
-
+/*########## GENERAL FUNCTIONS ##########*/
+void		free_split(char **split);
 #endif
 

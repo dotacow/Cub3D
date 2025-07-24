@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/07/25 00:37:39 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 02:13:25 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 
 /**
- * @brief this will read the map file line by line and validate each line
- *	according to each component's grammar
- * @param str
- * @param found
- * @return int
+ * @brief a wrapper to choose which validator to use based on the key
+ * @param str the line to validate
+ * @param found the frequency array to update and check from
+ * @return int 1 if valid, 0 if not
  */
 static int	validate_line(char *str, t_elements *found)
 {
