@@ -1,20 +1,31 @@
-C = cc
+RENDER= render.c
+
+PARSER= parsing/validate_map.c parsing/utils.c
+
+FILES = main.c $(PARSER) # $(RENDER)
+
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -MMD -MP -Iincludes -I$(MLXDIR)/include -I$(LIBFTDIR)/includes -Ofast #only use one of g3 or Ofast at a time for best results
 LDFLAGS = -L$(LIBFTDIR) -L$(MLXDIR)/build -lft -lmlx42 -lm -ldl -lglfw
+
 # Directories
 SRCDIR = src
 ODIR = ofiles
 LIBFTDIR = libft
 MLXDIR = MLX42
+
 # configuring source and object files:
 include Files.mk
 SRC = $(addprefix $(SRCDIR)/, $(FILES))
 OBJS = $(addprefix $(ODIR)/,$(FILES:.c=.o))
+
 # Dependencies
 DEPS = $(OBJS:.o=.d)
+
 # libraries
 LIBFT = $(LIBFTDIR)/libft.a
 MLX = $(MLXDIR)/build/libmlx42.a
+
 # Executable name
 NAME = cub3D
 
@@ -23,7 +34,9 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
 
+# Pattern rule for object files
 $(ODIR)/%.o: $(SRCDIR)/%.c | $(ODIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(ODIR):
