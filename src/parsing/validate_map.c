@@ -3,60 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/07/24 17:18:24 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/07/24 20:17:44 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub3d.h"
-#include <asm-generic/errno-base.h>
+#include "../../includes/cub3d.h"
 
-/**
- * @brief inits the map elements to not yet found (-1)
- * usage: found[NO|SO...|MAP] = 0 on found
- * @param found the frequency array to check for previously found elements 
- */
-static void init_found_arr(t_elements *found)
+
+
+static int validate_line(char *str,t_elements *found)
 {
-    int i;
-
-    i = -1;
-    while(++i < 8)
-        found[i] = -1;
+	char	**keyval;
+	
+	if (!*str)
+		return (true);
 }
+
+
 
 /**
  * @brief this will read the map file line by line and validate each line
- * exigencies: in line check if:
+ * exigencies: in line check if (after trim):
  *  * NO|SO|WE|EA
  *  *   * validate file permessions, validate file type(xpm).
  *  * F|C
- *  *   * validate each rgb value
+ *  *   * validate each rgb value (0-255)
  *  * 1|0
  *  *   * if not found all needed map elements, throw error
  *  *   * validate map contents
  *  * else
  *  *   * foreign character found, return error
- * @param filename 
- * @return int 
+ * @param fd map fd
+ * @return 1 if valid, 0 if not
  */
-int validate_map(const char *filename)
+int is_valid_map(int fd)
 {
-    int fd;
-    char *line;
-    t_elements found[8];
-    
-    if (fd < 0)
-    {
-        errno = EACCES;
-        perror("Error opening file");
-        exit(errno);
-    }
-    line = get_next_line(fd);
-    while (line)
-    {
-        line = get_next_line(fd);
-    }
+	char		*line;
+	t_elements	found[NMAPELEMENTS];
+	int			valid;
+
+	valid = false;
+	if (fd < 0)
+	{
+		errno = EACCES;
+		perror("Error\nCub3D");
+		exit(errno);
+	}
+	init_found_arr(found);
+	line = get_next_line(fd);
+	while (line)
+	{
+		trim_whitespace(line);
+		valid = validate_line(line,found);
+		free(line);
+		if (!valid)
+			break;
+		line = get_next_line(fd);
+	}
+	return (valid && is_all_found(found));
 }

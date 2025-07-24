@@ -3,14 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:29:11 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/07/24 16:30:19 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/07/24 20:06:42 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
+
+
+int		ft_isspace(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n')
+		return (1);
+	return (0);
+}
+
+void	trim_whitespace(char *str)
+{
+	char	*start;
+	char	*end;
+	size_t	len;
+
+	if (!str || !*str)
+		return;
+	start = str;
+	while (*start && ft_isspace(*start))
+		start++;
+	if (!*start)
+	{
+		*str = '\0';
+		return;
+	}
+	end = start + ft_strlen(start) - 1;
+	while (end > start && ft_isspace(*end))
+		end--;
+	len = end - start + 1;
+	ft_memmove(str, start, len);
+	str[len] = '\0';
+}
 
 void	check_name(char *name)
 {
@@ -20,8 +52,9 @@ void	check_name(char *name)
 
 	if (ft_strlen(name) < 4)
 	{
-		perror("Error\nmap must name .cub\n");
-		exit(1);
+		errno = EINVAL;
+		perror("Error\ncub3d");
+		exit(errno);
 	}
 	i = 0;
 	j = 3;
@@ -32,8 +65,9 @@ void	check_name(char *name)
 	{
 		if (cub[j--] != name[--i])
 		{
-			perror("Error\nmap must be name .cub\n");
-			exit(1);
+			errno = EINVAL;
+			perror("Error\ncub3d");
+			exit(errno);
 		}
 	}
 }
@@ -45,7 +79,7 @@ int validate_args(int ac, char **av)
 	if (ac != 2)
 	{
 		errno = EINVAL;
-		perror("Error\nCub3d");
+		perror("Error\ncub3d");
 		ft_putendl_fd("Usage: ./cub3d <map.cub>", STDERR_FILENO);
 		return (0);
 	}
@@ -53,7 +87,7 @@ int validate_args(int ac, char **av)
 	if (fd == -1)
 	{
 		errno = EACCES;
-		perror("Error\nCub3D"); 
+		perror("Error\ncub3d");
 		return (0);
 	}
 	close(fd);

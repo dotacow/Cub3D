@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 17:17:46 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/07/24 20:19:07 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// #include <cstddef>
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/time.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <errno.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
+# define NMAPELEMENTS 8
+
 /**
  * @brief enums for the frequency array used to help map validation
- * 
+ *
  */
 typedef enum e_elements
 {
@@ -99,9 +101,17 @@ typedef struct s_player
 	t_point	position;
 } t_player;
 
-void	check_name(char *name);
+/*########## PARSING FUNCTIONS ##########*/
 int		validate_args(int ac, char **av);
-int		validate_map(const char *filename);
-
+int		is_valid_map(int fd);
+//parsing utils
+int		ft_isspace(char c);
+void	trim_whitespace(char *str);
+void	check_name(char *name);
+// frequency array utils
+void	init_found_arr(t_elements *found);
+int		is_all_found(t_elements *found);
+//readmodes
+t_elements		set_read_mode(char **keyval);
 #endif
 
