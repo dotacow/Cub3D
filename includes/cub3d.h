@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/25 00:08:22 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:20:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ int			validate_we(char *val, t_elements *found);
 int			validate_ea(char *val, t_elements *found);
 int			validate_floor(char *val, t_elements *found);
 int			validate_ceil(char *val, t_elements *found);
-int			validate_player(char *val, t_elements *found);
 int			validate_map_content(char *line, t_elements *found, int fd);
 
 #endif

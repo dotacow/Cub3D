@@ -6,12 +6,20 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/07/25 00:08:27 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 00:37:39 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+
+/**
+ * @brief this will read the map file line by line and validate each line
+ *	according to each component's grammar
+ * @param str
+ * @param found
+ * @return int
+ */
 static int	validate_line(char *str, t_elements *found)
 {
 	char		**keyval;
@@ -22,8 +30,9 @@ static int	validate_line(char *str, t_elements *found)
 		validate_we,
 		validate_ea,
 		validate_floor,
-		validate_ceil,
+		validate_ceil
 	};
+	int		ret;
 
 	if (!*str)
 		return (true);
@@ -31,22 +40,23 @@ static int	validate_line(char *str, t_elements *found)
 	if (!keyval)
 		return (false);
 	idx = set_validator(keyval);
+	if (idx != -1)
+		ret = validators[idx](keyval[1], found);
+	else
+		ret = false;
 	free(keyval);
-	if (idx == -1)
-		return (false);
-	return (validators[idx](str, found));
+	return (ret);
 }
-
 
 int is_map_content(char *line)
 {
 	if (!line || !*line)
 		return (false);
 	if (*line != '1' && *line != '0' && *line != ' '
-		&& ft_strncmp(line, "N", 3)
-		&& ft_strncmp(line, "S", 3)
-		&& ft_strncmp(line, "E", 3)
-		&& ft_strncmp(line, "W", 3))
+		&& ft_strncmp(line, "N", 3) != 0
+		&& ft_strncmp(line, "S", 3) != 0
+		&& ft_strncmp(line, "E", 3) != 0
+		&& ft_strncmp(line, "W", 3) != 0)
 		return (false);
 	return (true);
 }
@@ -55,11 +65,10 @@ int is_map_content(char *line)
  * @brief this will read the map file line by line and validate each line
  * exigencies: in line check if (after trim):
  *  * NO|SO|WE|EA
- *  *   * validate file permessions, validate file type(xpm).
+ *  *   * validate xpm42
  *  * F|C
  *  *   * validate each rgb value (0-255)
  *  * 1|0
- *  *   * if not found all needed map elements, throw error
  *  *   * validate map contents
  *  * else
  *  *   * foreign character found, return error
