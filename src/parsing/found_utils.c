@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:15:52 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 20:16:55 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/26 18:51:52 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief inits the map elements to not yet found (0)
- * usage: found[NO|SO...|MAP] = 1 on found
+ * usage: found[NO|SO...|MAP] = true on found
  * @param found the frequency array to check for previously found elements
  */
 void init_found_arr(t_elements *found)

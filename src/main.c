@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/26 18:55:00 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/26 19:03:27 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (1);
-	is_valid_map(fd);
+	if(!is_valid_map(fd))
+	{
+		ft_putendl_fd("Error\nmap misconfiguration!", 2);
+		return (1);
+	}
 	//map = init_map(fd);
 	//cast_thy_rays(map);
 	//loops_hooks and mlx stuff
