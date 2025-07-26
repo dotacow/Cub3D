@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/07/25 02:13:25 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:44:08 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,17 @@ static int	validate_line(char *str, t_elements *found)
 
 int is_map_content(char *line)
 {
+	char	*trimmed_line;
+
 	if (!line || !*line)
 		return (false);
+	trimmed_line = ft_strtrim(line, " \t\n\r\v\f");
+	if (!trimmed_line || !*trimmed_line)
+	{
+		free(trimmed_line);
+		return (false);
+	}
+	free(trimmed_line);
 	if (*line != '1' && *line != '0' && *line != ' '
 		&& ft_strncmp(line, "N", 3) != 0
 		&& ft_strncmp(line, "S", 3) != 0
