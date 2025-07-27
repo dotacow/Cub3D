@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/26 16:37:24 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:16:41 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,47 +81,43 @@ typedef struct s_map_elements
 	unsigned int	floor;
 	unsigned int	ceiling;
 	char			*map;
-	mlx_texture_t	*north;
-	mlx_texture_t	*south;
-	mlx_texture_t	*west;
-	mlx_texture_t	*east;
+	xpm_t	*north;
+	xpm_t	*south;
+	xpm_t	*west;
+	xpm_t	*east;
 	size_t			columns;
 	size_t			rows;
+	t_vector		player;
+	t_vector		plane;
 } t_map_elements;
 
-/**
- * @brief:the vector representing the camera pov
- * @param theta: the current direction of the camera, initialized (by hamooz) to N,S,W,E
- * @param position: the position
- */
-typedef struct s_player
-{
-	float	theta;
-	t_point	position;
-} t_player;
-
 /*########## PARSING FUNCTIONS ##########*/
-int			validate_args(int ac, char **av);
-int			is_valid_map(int fd);
+int				validate_args(int ac, char **av);
+int				is_valid_map(int fd);
 //parsing utils
-int			ft_isspace(char c);
-void		trim_whitespace(char *str);
-void		check_name(char *name);
-int			is_map_content(char *line);
-int			is_rgb_format(char *str);
+int				ft_isspace(char c);
+void			trim_whitespace(char *str);
+void			check_name(char *name);
+int				is_map_content(char *line);
+int				is_rgb_format(char *str);
 // frequency array utils
-void		init_found_arr(t_elements *found);
-int			is_all_found(t_elements *found);
+void			init_found_arr(t_elements *found);
+int				is_all_found(t_elements *found);
 //validators
-int			set_validator(char **keyval);
-int			validate_no(char *val, t_elements *found);
-int			validate_so(char *val, t_elements *found);
-int			validate_we(char *val, t_elements *found);
-int			validate_ea(char *val, t_elements *found);
-int			validate_floor(char *val, t_elements *found);
-int			validate_ceil(char *val, t_elements *found);
-int			validate_map_content(char *line, t_elements *found, int fd);
+int				set_validator(char **keyval);
+int				validate_no(char *val, t_elements *found);
+int				validate_so(char *val, t_elements *found);
+int				validate_we(char *val, t_elements *found);
+int				validate_ea(char *val, t_elements *found);
+int				validate_floor(char *val, t_elements *found);
+int				validate_ceil(char *val, t_elements *found);
+int				validate_map_content(char *line, t_elements *found, int fd);
 /*########## GENERAL FUNCTIONS ##########*/
-void		free_split(char **split);
+void			free_split(char **split);
+/*########## INIT FUNCTIONS ##########*/
+t_map_elements	init_map(int fd);
+/*########## MATH FUNCTIONS ##########*/
+void			bzero_vector(t_vector *v);
+void			bzero_point(t_point *p);
 #endif
 
