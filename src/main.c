@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/26 19:03:27 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:28:31 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	//map = init_map(fd);
+	// if (!errno)
+	//{
 	//cast_thy_rays(map);
 	//loops_hooks and mlx stuff
+	//}
+	//clean_up
 	return (0);
 }

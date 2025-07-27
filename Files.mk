@@ -1,5 +1,7 @@
 RENDER= render.c
 
+VECTORS= vector_helpers.c
+
 INIT=
 
 #EXIT= exit/utils.c

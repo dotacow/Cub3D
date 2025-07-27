@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/27 21:16:41 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:23:28 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ int				validate_map_content(char *line, t_elements *found, int fd);
 void			free_split(char **split);
 /*########## INIT FUNCTIONS ##########*/
 t_map_elements	init_map(int fd);
+int			init_map_elements(t_map_elements *map, int fd);
+int			init_map_content(t_map_elements *map, int fd);
 /*########## MATH FUNCTIONS ##########*/
 void			bzero_vector(t_vector *v);
 void			bzero_point(t_point *p);
