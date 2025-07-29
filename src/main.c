@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hamzabillah <hamzabillah@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 22:21:20 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 21:14:22 by hamzabillah      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,24 @@ static void ft_hook(void* param)
 
 int32_t	main(int ac, char **av)
 {
+	int fd;
 
 	// MLX allows you to define its core behaviour before startup.
 	if (!validate_args(ac, av))
 		return (0);
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		perror("open");
+		return (1);
+	}
+	if (!is_valid_map(fd))
+	{
+		ft_putendl_fd("Error: Invalid map. Exiting.", 2);
+		close(fd);
+		return (1);
+	}
+	close(fd);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "hello world ;p", false);
 	if (!mlx)

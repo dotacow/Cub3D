@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dotacow <dotacow@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hamzabillah <hamzabillah@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 12:51:23 by yokitane          #+#    #+#             */
-/*   Updated: 2024/11/28 23:23:03 by dotacow          ###   ########.fr       */
+/*   Updated: 2025/07/25 19:40:54 by hamzabillah      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0' && s[i] != ' ')
+	size_t	i = 0;
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }

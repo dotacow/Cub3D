@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hamzabillah <hamzabillah@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 11:21:56 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/25 01:56:27 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/07/25 22:09:09 by hamzabillah      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 int					ft_printf(const char *format, ...);
 int					ft_putadd_fd(unsigned long nb, int fd, unsigned long base);
 int					ft_putnbr_fd_lower(long long nb, int fd, int base);
+void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif
