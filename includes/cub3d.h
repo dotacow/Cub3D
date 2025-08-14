@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 17:17:46 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/08/14 17:05:26 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_player
 void	check_name(char *name);
 int		validate_args(int ac, char **av);
 int		validate_map(const char *filename);
+int		validate_map_grid(char **map);
 
 #endif
 

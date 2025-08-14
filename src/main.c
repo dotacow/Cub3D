@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/24 16:50:53 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/08/14 17:11:25 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int32_t	main(int ac, char **av)
 	// MLX allows you to define its core behaviour before startup.
 	if (!validate_args(ac, av))
 		return (0);
+	
+	// Validate the map before opening MLX window
+	if (!validate_map(av[1]))
+		return (1);
+	
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "hello world ;p", true);
 	if (!mlx)
