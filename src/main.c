@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 20:23:46 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 20:47:29 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	main(int argc, char **argv)
 		ft_putendl_fd("Error\nmap misconfiguration!", 2);
 		return (1);
 	}
-	//map = init_map(fd);
+	// init_map(fd, &map);
 	// if (!errno)
 	//{
 	//	cast_thy_rays(map);
 	//...loops_hooks and mlx stuff...
 	//}
 	//clean_up();
-	return (0);
+	return (errno);
 }

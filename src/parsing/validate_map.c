@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/15 20:28:33 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:05:02 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ static int	validate_line(char *str, t_elements *found)
 	return (ret);
 }
 
+/**
+ * @brief are you in the matrix(content) part, or in the textures part?
+ *
+ * @param line the line to check
+ * @return int 1 if the line is part of the map content, 0 if not
+ */
 int is_map_content(char *line)
 {
 	char	*trimmed_line;

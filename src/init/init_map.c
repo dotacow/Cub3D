@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/27 21:35:06 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:02:14 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,40 @@ void	bzero_map(t_map_elements *map)
 	bzero_vector(&map->player);
 	bzero_vector(&map->plane);
 }
+
+/**
+ * @brief responsible for initializing floor and ceiling colors, and textures.
+ *
+ * @param map map struct
+ * @param fd map fd
+ * @return int 0 on success, errno on failure.
+ */
 int	init_map_elements(t_map_elements *map,int fd)
 {
 	char	*line;
 
 	line = get_next_line(fd);
 	if (!line)
-
+	{
+		errno = ENOMEM;
+		return (-1);
+	}
+	
 }
 int	init_map_content(t_map_elements *map,int fd);
 
-t_map_elements	init_map(int fd)
+/**
+ * @brief map loader entry point. returns a fully initialized map
+ *
+ * @param fd fd to the map file.
+ * @param map pointer to the map elements struct to fill.
+ * @return int 0 on success, errno on failure.
+ */
+int	init_map(int fd,t_map_elements *map)
 {
-	t_map_elements	map;
-
-	bzero_map(&map);
-	if ((init_map_elements(&map, fd) == -1
-		|| init_map_content(&map, fd) == -1) && !errno)
+	bzero_map(map);
+	if ((init_map_elements(map, fd) == -1
+		|| init_map_content(map, fd) == -1) && !errno)
 			errno =  ENOMEM;
-	return (map);
+	return (errno);
 }
