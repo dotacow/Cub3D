@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 21:02:14 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:45:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,19 @@ int	init_map_elements(t_map_elements *map,int fd)
 		errno = ENOMEM;
 		return (-1);
 	}
-	
+	while (line && !is_map_content(line))
+	{
+		trim_whitespace(line);
+		if(*line)
+			errno = load_data(map, line);
+		free(line);
+		if (errno)
+			return (errno);
+		line = get_next_line(fd);
+	}
+	if (line)
+		free(line);
+	return (0);
 }
 int	init_map_content(t_map_elements *map,int fd);
 
