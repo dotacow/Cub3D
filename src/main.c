@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/27 21:28:31 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 20:23:46 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	main(int argc, char **argv)
 	//map = init_map(fd);
 	// if (!errno)
 	//{
-	//cast_thy_rays(map);
-	//loops_hooks and mlx stuff
+	//	cast_thy_rays(map);
+	//...loops_hooks and mlx stuff...
 	//}
-	//clean_up
+	//clean_up();
 	return (0);
 }

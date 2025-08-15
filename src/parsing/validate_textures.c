@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:07:34 by yokitane          #+#    #+#             */
-/*   Updated: 2025/07/25 00:42:11 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 20:27:12 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ int validate_no(char *val, t_elements *found)
 	if (found[NO])
 		return (false);
 	found[NO] = true;
-	xpm_t *xpm = mlx_load_xpm42(val);
-	if (!xpm)
+	mlx_texture_t *texture = mlx_load_png(val);
+	if (!texture)
 		return (false);
-	mlx_delete_xpm42(xpm);
+	mlx_delete_texture(texture);
 	return (true);
 }
 
@@ -49,10 +49,10 @@ int validate_so(char *val, t_elements *found)
 	if (found[SO])
 		return (false);
 	found[SO] = true;
-	xpm_t *xpm = mlx_load_xpm42(val);
-	if (!xpm)
+	mlx_texture_t *texture = mlx_load_png(val);
+	if (!texture)
 		return (false);
-	mlx_delete_xpm42(xpm);
+	mlx_delete_texture(texture);
 	return (true);
 }
 
@@ -61,10 +61,10 @@ int validate_we(char *val, t_elements *found)
 	if (found[WE])
 		return (false);
 	found[WE] = true;
-	xpm_t *xpm = mlx_load_xpm42(val);
-	if (!xpm)
+	mlx_texture_t *texture = mlx_load_png(val);
+	if (!texture)
 		return (false);
-	mlx_delete_xpm42(xpm);
+	mlx_delete_texture(texture);
 	return (true);
 }
 
@@ -73,9 +73,9 @@ int validate_ea(char *val, t_elements *found)
 	if (found[EA])
 		return (false);
 	found[EA] = true;
-	xpm_t *xpm = mlx_load_xpm42(val);
-	if (!xpm)
+	mlx_texture_t *texture = mlx_load_png(val);
+	if (!texture)
 		return (false);
-	mlx_delete_xpm42(xpm);
+	mlx_delete_texture(texture);
 	return (true);
 }

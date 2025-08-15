@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/07/26 16:44:08 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 20:28:33 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int is_map_content(char *line)
  * @brief this will read the map file line by line and validate each line
  * exigencies: in line check if (after trim):
  *  * NO|SO|WE|EA
- *  *   * validate xpm42
+ *  *   * validate texture file.
  *  * F|C
  *  *   * validate each rgb value (0-255)
  *  * 1|0
