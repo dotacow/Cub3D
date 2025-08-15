@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 21:45:39 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 22:10:03 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_vector
 
 /**
  * @brief: contains the successfully validated map elements
- * @param map: flat matrix representing the map, p for padding, e for empty, w for wall.
+ * @param map: flat matrix representing the map, 0 for empty, 1 for wall, spaces are treated as 1's.
  * @param north: north wall texture
  * @param south: south wall texture
  * @param west: west wall texture
