@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 22:10:03 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 23:16:05 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_vector
 /**
  * @brief: contains the successfully validated map elements
  * @param map: flat matrix representing the map, 0 for empty, 1 for wall, spaces are treated as 1's.
+ * @param firstline: the first line of the map, used while loading map.
  * @param north: north wall texture
  * @param south: south wall texture
  * @param west: west wall texture
@@ -83,6 +84,7 @@ typedef struct s_map_elements
 	unsigned int	floor;
 	unsigned int	ceiling;
 	char			*map;
+	char			*firstline;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;

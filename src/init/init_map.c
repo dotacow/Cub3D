@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 23:04:52 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/15 23:17:01 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	init_map_elements(t_map_elements *map,int fd)
 		line = get_next_line(fd);
 	}
 	if (line)
-		free(line);
+		map->firstline  = line;
 	return (0);
 }
 int	init_map_content(t_map_elements *map,int fd);
