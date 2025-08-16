@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 23:16:05 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:42:23 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_vector
 /**
  * @brief: contains the successfully validated map elements
  * @param map: flat matrix representing the map, 0 for empty, 1 for wall, spaces are treated as 1's.
- * @param firstline: the first line of the map, used while loading map.
+ * @param line: the first line of the map, used while loading map.
  * @param north: north wall texture
  * @param south: south wall texture
  * @param west: west wall texture
@@ -84,12 +84,12 @@ typedef struct s_map_elements
 	unsigned int	floor;
 	unsigned int	ceiling;
 	char			*map;
-	char			*firstline;
+	char			*line;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	size_t			columns;
+	size_t			cols;
 	size_t			rows;
 	t_vector		player;
 	t_vector		plane;
@@ -118,7 +118,9 @@ int				validate_ceil(char *val, t_elements *found);
 int				validate_map_content(char *line, t_elements *found, int fd);
 /*########## GENERAL FUNCTIONS ##########*/
 void			free_split(char **split);
+void			*ft_realloc(void *ptr, size_t new_size);
 /*########## INIT FUNCTIONS ##########*/
+void		bzero_map(t_map_elements *map);
 int			init_map(int fd, t_map_elements *map);
 int			init_map_elements(t_map_elements *map, int fd);
 int			init_map_content(t_map_elements *map, int fd);
@@ -127,5 +129,7 @@ int			load_data(t_map_elements *map, char *line);
 /*########## MATH FUNCTIONS ##########*/
 void			bzero_vector(t_vector *v);
 void			bzero_point(t_point *p);
+/*########## CLEANUP FUNCTIONS ##########*/
+void			clean_map(t_map_elements *map);
 #endif
 

@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:29:11 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/07/26 18:48:36 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:22:01 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,25 @@ int validate_args(int ac, char **av)
 	close(fd);
 	check_name(av[1]);
 	return (1);
+}
+
+void *ft_realloc(void *ptr, size_t new_size)
+{
+	void *new_ptr;
+
+	if (!ptr)
+		return (malloc(new_size));
+	if (new_size == 0)
+	{
+		free(ptr);
+		ptr = NULL;
+		return (ptr);
+	}
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+		return (NULL);
+	ft_memmove(new_ptr, ptr, new_size);
+	free(ptr);
+	ptr = NULL;
+	return (new_ptr);
 }
