@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/15 21:05:02 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:34:37 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,15 @@ int	is_valid_map(int fd)
 		line = get_next_line(fd);
 	}
 	return (valid && is_all_found(found));
+}
+/**
+ * @brief evaluates the matrix section of the map file
+ * @details ensures matrix is closed, and has a player spawn, and no invalid chars.
+ * @warning TEMP IMPLEMENTATION TILL HAMZA FINISHES, ALWAYS RETURNS TRUE FOR NOW SO I CAN COMPILE MY CODE
+ * @return true(1) if valid, false(0) if not.
+ */
+int	validate_map_content(char *line, t_elements *found, int fd)
+{
+	(void)line,(void)found,(void)fd;
+	return (true);
 }
