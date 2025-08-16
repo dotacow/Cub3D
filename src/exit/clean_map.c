@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 19:29:51 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/16 15:08:41 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:42:23 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	clean_map(t_map_elements *map)
 		free(map->map);
 		map->map = NULL;
 	}
-	if(map->firstline)
+	if(map->line)
 	{
-		free(map->firstline);
-		map->firstline = NULL;
+		free(map->line);
+		map->line = NULL;
 	}
 	clean_textures(map);
 	bzero_map(map);

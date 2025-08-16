@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/16 17:34:47 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:46:08 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,23 @@
  */
 static int read_map(t_map_elements *map, int fd)
 {
-	while (map->firstline && is_map_content(map->firstline))
+	int	cols;
+
+	cols = 0;
+	while (map->line && is_map_content(map->line))
 	{
-		map->map = ft_realloc(map->map,
-			ft_strlen(map->map) + ft_strlen(map->firstline) + 1);
+		cols = ft_strlen(map->line);
+		map->map = ft_realloc(map->map, ft_strlen(map->map) + cols + 1);
 		if (!map->map)
 			return (ENOMEM);
-		ft_memmove(map->map + ft_strlen(map->map), map->firstline,
-			ft_strlen(map->firstline) + 1);
-		map->firstline = get_next_line(fd);
+		map->line = get_next_line(fd);
 		if (errno)
 			return (errno);
 	}
-	if (map->firstline)
+	if (map->line)
 	{
-		free(map->firstline);
-		map->firstline = NULL;
+		free(map->line);
+		map->line = NULL;
 	}
 	return (0);
 }
