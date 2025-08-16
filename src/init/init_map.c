@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/16 14:59:27 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:35:38 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ int	init_map(int fd,t_map_elements *map)
 {
 	bzero_map(map);
 	if ((init_map_elements(map, fd) == -1
-		|| init_map_content(map, fd) == -1) && !errno)
+		|| init_map_content(map, fd) == -1))
 	{
-			errno =  ENOMEM;
+			if(!errno)
+				errno =  ENOMEM;
 			clean_map(map);
 	}
 	close(fd);

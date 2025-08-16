@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/16 15:08:35 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:22:00 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int				validate_ceil(char *val, t_elements *found);
 int				validate_map_content(char *line, t_elements *found, int fd);
 /*########## GENERAL FUNCTIONS ##########*/
 void			free_split(char **split);
+void			*ft_realloc(void *ptr, size_t new_size);
 /*########## INIT FUNCTIONS ##########*/
 void		bzero_map(t_map_elements *map);
 int			init_map(int fd, t_map_elements *map);
