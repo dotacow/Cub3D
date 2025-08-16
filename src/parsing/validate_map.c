@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/16 14:34:37 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:35:47 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int is_map_content(char *line)
 
 /**
  * @brief this will read the map file line by line and validate each line
- * exigencies: in line check if (after trim):
+ * @details: in line check if (after trim):
  *  * NO|SO|WE|EA
  *  *   * validate texture file.
  *  * F|C
