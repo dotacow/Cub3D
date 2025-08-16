@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 23:17:01 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:59:27 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	bzero_map(t_map_elements *map)
 	map->south = NULL;
 	map->west = NULL;
 	map->east = NULL;
-	map->columns = 0;
+	map->cols = 0;
 	map->rows = 0;
 	bzero_vector(&map->player);
 	bzero_vector(&map->plane);
@@ -74,6 +74,10 @@ int	init_map(int fd,t_map_elements *map)
 	bzero_map(map);
 	if ((init_map_elements(map, fd) == -1
 		|| init_map_content(map, fd) == -1) && !errno)
+	{
 			errno =  ENOMEM;
+			clean_map(map);
+	}
+	close(fd);
 	return (errno);
 }

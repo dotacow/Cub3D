@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/15 23:16:05 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/16 15:08:35 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_map_elements
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	size_t			columns;
+	size_t			cols;
 	size_t			rows;
 	t_vector		player;
 	t_vector		plane;
@@ -119,6 +119,7 @@ int				validate_map_content(char *line, t_elements *found, int fd);
 /*########## GENERAL FUNCTIONS ##########*/
 void			free_split(char **split);
 /*########## INIT FUNCTIONS ##########*/
+void		bzero_map(t_map_elements *map);
 int			init_map(int fd, t_map_elements *map);
 int			init_map_elements(t_map_elements *map, int fd);
 int			init_map_content(t_map_elements *map, int fd);
@@ -127,5 +128,7 @@ int			load_data(t_map_elements *map, char *line);
 /*########## MATH FUNCTIONS ##########*/
 void			bzero_vector(t_vector *v);
 void			bzero_point(t_point *p);
+/*########## CLEANUP FUNCTIONS ##########*/
+void			clean_map(t_map_elements *map);
 #endif
 

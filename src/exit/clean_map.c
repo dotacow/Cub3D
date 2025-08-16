@@ -1,46 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_content.c                                     :+:      :+:    :+:   */
+/*   clean_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/16 15:05:28 by yokitane         ###   ########.fr       */
+/*   Created: 2025/07/24 19:29:51 by yokitane          #+#    #+#             */
+/*   Updated: 2025/08/16 15:08:41 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 
-void parse_line(t_map_elements *map, char *line)
+static void clean_textures(t_map_elements *map)
 {
-
+	if (map->north)
+	{
+		mlx_delete_texture(map->north);
+		map->north = NULL;
+	}
+	if (map->south)
+	{
+		mlx_delete_texture(map->south);
+		map->south = NULL;
+	}
+	if (map->west)
+	{
+		mlx_delete_texture(map->west);
+		map->west = NULL;
+	}
+	if (map->east)
+	{
+		mlx_delete_texture(map->east);
+		map->east = NULL;
+	}
 }
 
-/**
- * @brief entry point for matrix loading.
- * @param map	map struct
- * @param fd	map file fd.
- * @return int 0 on success, errno val on failure.
- */
-int init_map_content(t_map_elements *map, int fd)
-{
-	char	*line;
 
-	line = map->firstline;
-	while (line && is_map_content(line))
+void	clean_map(t_map_elements *map)
+{
+	if (map->map)
 	{
-		parse_line(map,line);
-		free(line);
-		line = get_next_line(fd);
-		if (errno)
-			return (errno);
+		free(map->map);
+		map->map = NULL;
 	}
-	if (map->firstline)
+	if(map->firstline)
 	{
 		free(map->firstline);
 		map->firstline = NULL;
 	}
-	return (0);
+	clean_textures(map);
+	bzero_map(map);
 }
