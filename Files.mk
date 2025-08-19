@@ -6,7 +6,7 @@ INIT= init/init_content.c init/init_map.c init/loaders.c init/get_map_ent.c
 PARSING= parsing/found_utils.c parsing/validate_textures.c \
 		parsing/validate_map.c parsing/utils.c parsing/validate_rgb.c
 
-UTILS= utils/memhelpers.c
+UTILS= 
 
 RENDER= render/render.c
 

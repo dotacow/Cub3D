@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/19 18:46:00 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:24:52 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	is_valid_map(int fd)
 		trim_whitespace(line);
 		valid = validate_line(line, found);
 		free(line);
+		line = NULL;
 		if (!valid)
 			break ;
 		line = get_next_line(fd);
