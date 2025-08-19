@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/16 17:42:23 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:04:42 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,14 @@ int				validate_ceil(char *val, t_elements *found);
 int				validate_map_content(char *line, t_elements *found, int fd);
 /*########## GENERAL FUNCTIONS ##########*/
 void			free_split(char **split);
-void			*ft_realloc(void *ptr, size_t new_size);
+char			*skip_to_map(int fd);
 /*########## INIT FUNCTIONS ##########*/
 void		bzero_map(t_map_elements *map);
-int			init_map(int fd, t_map_elements *map);
+int			init_map(const char *path, t_map_elements *map);
 int			init_map_elements(t_map_elements *map, int fd);
 int			init_map_content(t_map_elements *map, int fd);
+int			read_map(t_map_elements *map, int fd);
+int			get_map_ent(t_map_elements *map, int fd);
 /*########## LOADING FUNCTIONS ##########*/
 int			load_data(t_map_elements *map, char *line);
 /*########## MATH FUNCTIONS ##########*/

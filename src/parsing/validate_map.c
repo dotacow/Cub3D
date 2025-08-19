@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/16 14:45:30 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:46:00 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,9 @@ int	is_valid_map(int fd)
 			break ;
 		line = get_next_line(fd);
 	}
+	if (line)
+		free(line);
+	line = NULL;
 	return (valid && is_all_found(found));
 }
 /**
@@ -122,6 +125,7 @@ int	is_valid_map(int fd)
  */
 int	validate_map_content(char *line, t_elements *found, int fd)
 {
-	(void)line,(void)found,(void)fd;
+	(void)line,(void)fd;
+	found[MAP] = true;
 	return (true);
 }
