@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 19:04:42 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:23:33 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ typedef struct s_map_elements
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	size_t			cols;
-	size_t			rows;
+	int				cols;
+	int				rows;
 	t_vector		player;
 	t_vector		plane;
 } t_map_elements;

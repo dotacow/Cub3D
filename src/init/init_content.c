@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 18:17:30 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/19 19:23:08 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ int init_map_content(t_map_elements *map, int fd)
 	ret = read_map(map, fd);
 	if (ret)
 		return (-1);
+	return (0);
 }
