@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 16:50:00 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:17:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param str the string to pad
  * @param n ntimes to insert the pad_char
  */
- void right_pad(char *str, int n, char pad_char)
+static void right_pad(char *str, int n, char pad_char)
  {
 	int i;
 
@@ -40,16 +40,16 @@
  * @param fd
  * @return int
  */
-static int read_map(t_map_elements *map, int fd)
+int read_map(t_map_elements *map, int fd)
 {
 	int		offset;
-	size_t	line_len;
+	int		line_len;
 
-	map->map = malloc((map->rows * map->cols) + 1);
+	map->map = ft_calloc((map->rows * map->cols) + 1, sizeof(char));
 	if (!map->map)
 		return (ENOMEM);
 	offset = 0;
-	while (map->line && is_map_content(map->line))
+	while (map->line && offset < (map->rows * map->cols))
 	{
 		line_len = ft_strlcpy(map->map + offset, map->line, map->cols + 1);
 		right_pad(map->map + offset + line_len, map->cols - line_len, ' ');
