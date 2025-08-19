@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/28 19:21:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 15:49:12 by yokitane         ###   ########.fr       */
+/*   Created: 2025/08/19 15:37:09 by yokitane          #+#    #+#             */
+/*   Updated: 2025/08/19 16:47:53 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void *ft_realloc(void *ptr, size_t new_size)
 {
-	size_t				i;
-	const unsigned char	*tmpsrc;
-	unsigned char		*tmpdest;
+	void *new_ptr;
 
-	if (!dest && !src)
-		return (dest);
-	tmpdest = dest;
-	tmpsrc = src;
-	i = 0;
-	while (i < n)
+	if (!ptr)
+		return (malloc(new_size));
+	if (new_size == 0)
 	{
-		tmpdest[i] = tmpsrc[i];
-		i++;
+		free(ptr);
+		ptr = NULL;
+		return (ptr);
 	}
-	return (dest);
+	new_ptr = malloc(new_size);
+	if (!new_ptr)
+		return (NULL);
+	ft_memmove(new_ptr, ptr, new_size);
+	free(ptr);
+	ptr = NULL;
+	return (new_ptr);
 }

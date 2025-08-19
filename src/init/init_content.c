@@ -6,11 +6,32 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/16 17:46:08 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:50:00 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+
+/**
+ * @brief right pads a string with @param pad_char a given n times.
+ *
+ * @param str the string to pad
+ * @param n ntimes to insert the pad_char
+ */
+ void right_pad(char *str, int n, char pad_char)
+ {
+	int i;
+
+	if(n <= 0)
+		return ;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = pad_char;
+		i++;
+	}
+ }
 
 /**
  * @brief reads the map content from the file descriptor and stores it in the map struct
@@ -21,15 +42,19 @@
  */
 static int read_map(t_map_elements *map, int fd)
 {
-	int	cols;
+	int		offset;
+	size_t	line_len;
 
-	cols = 0;
+	map->map = malloc((map->rows * map->cols) + 1);
+	if (!map->map)
+		return (ENOMEM);
+	offset = 0;
 	while (map->line && is_map_content(map->line))
 	{
-		cols = ft_strlen(map->line);
-		map->map = ft_realloc(map->map, ft_strlen(map->map) + cols + 1);
-		if (!map->map)
-			return (ENOMEM);
+		line_len = ft_strlcpy(map->map + offset, map->line, map->cols + 1);
+		right_pad(map->map + offset + line_len, map->cols - line_len, ' ');
+		offset += map->cols;
+		free(map->line);
 		map->line = get_next_line(fd);
 		if (errno)
 			return (errno);
@@ -39,6 +64,7 @@ static int read_map(t_map_elements *map, int fd)
 		free(map->line);
 		map->line = NULL;
 	}
+	map->map[offset] = '\0';
 	return (0);
 }
 
