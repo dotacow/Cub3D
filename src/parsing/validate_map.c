@@ -6,11 +6,12 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/19 19:24:52 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:34:12 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <stdio.h>
 
 
 /**
@@ -43,7 +44,7 @@ static int	validate_line(char *str, t_elements *found)
 		ret = validators[idx](keyval[1], found);
 	else
 		ret = false;
-	free(keyval);
+	free_split(keyval);
 	return (ret);
 }
 
@@ -95,24 +96,20 @@ int	is_valid_map(int fd)
 	t_elements	found[NMAPELEMENTS];
 	int			valid;
 
-	valid = false;
+	valid = true;
 	init_found_arr(found);
 	line = get_next_line(fd);
-	while (line)
+	while (line && !is_map_content(line) && valid )
 	{
-		if(is_map_content(line))
-		{
-			valid = validate_map_content(line, found, fd);
-			break ;
-		}
+		printf("line: %s\n", line);
 		trim_whitespace(line);
 		valid = validate_line(line, found);
 		free(line);
 		line = NULL;
-		if (!valid)
-			break ;
 		line = get_next_line(fd);
 	}
+	if (valid)
+		valid = validate_map_content(line, found, fd);
 	if (line)
 		free(line);
 	line = NULL;

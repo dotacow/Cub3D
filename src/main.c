@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 18:47:24 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:19:46 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	int	fd;
 	t_map_elements map;
 
-	if (argc != 2 || !validate_args(argc, argv))
+	if (!validate_args(argc, argv))
 		return (0);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -35,6 +35,6 @@ int	main(int argc, char **argv)
 	//	cast_thy_rays(map);
 	//...loops_hooks and mlx stuff...
 	//}
-	//clean_up();
+	clean_map(&map);
 	return (errno);
 }
