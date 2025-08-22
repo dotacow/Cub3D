@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/20 17:34:12 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:47:43 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,27 @@ static int	validate_line(char *str, t_elements *found)
  */
 int is_map_content(char *line)
 {
-	char	*trimmed_line;
+	int		i;
 
-	if (!line || !*line)
+	if (!line)
 		return (false);
-	trimmed_line = ft_strtrim(line, " \t\n\r\v\f");
-	if (!trimmed_line || !*trimmed_line)
+	if (!ft_strncmp(line, "NO ", 3) ||
+		!ft_strncmp(line, "SO ", 3) ||
+		!ft_strncmp(line, "WE ", 3) ||
+		!ft_strncmp(line, "EA ", 3) ||
+		!ft_strncmp(line, "F ", 2) ||
+		!ft_strncmp(line, "C ", 2))
+		return (false);
+	i = 0;
+	while (line[i])
 	{
-		free(trimmed_line);
-		return (false);
+		if (line[i] != '1' && line[i] != '0' && line[i] != ' ' &&
+			line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
+		{
+			return (false);
+		}
+	line[i]++;
 	}
-	free(trimmed_line);
-	if (*line != '1' && *line != '0' && *line != ' '
-		&& ft_strncmp(line, "N", 3) != 0
-		&& ft_strncmp(line, "S", 3) != 0
-		&& ft_strncmp(line, "E", 3) != 0
-		&& ft_strncmp(line, "W", 3) != 0)
-		return (false);
 	return (true);
 }
 
@@ -101,7 +105,6 @@ int	is_valid_map(int fd)
 	line = get_next_line(fd);
 	while (line && !is_map_content(line) && valid )
 	{
-		printf("line: %s\n", line);
 		trim_whitespace(line);
 		valid = validate_line(line, found);
 		free(line);

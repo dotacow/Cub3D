@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:51:22 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/20 17:42:05 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:23:38 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int validate_floor(char *val, t_elements *found)
 	int		g;
 	int		b;
 
-	printf("Validating floor color: %s\n", val);
 	if (found[FLOOR] || (ft_count_words(val, ',') != 3)
 			|| !is_rgb_format(val))
 		return (false);

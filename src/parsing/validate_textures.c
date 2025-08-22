@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 20:07:34 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/20 17:50:40 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 15:28:19 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 int	set_validator(char **keyval)
 {
-	printf("set_validator called with keyval: %s\n%s\n%s\n", keyval[0], keyval[1],keyval[2]);
 	if (!keyval[0] || !keyval[1] || keyval[2])
 		return (-1);
 	if (!ft_strncmp(keyval[0], "NO",3))

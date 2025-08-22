@@ -1,9 +1,17 @@
 F 220,100,0
 C 225,30,0
-NO /home/yokitane/Code/Cub3D/resources/gybe.png
-SO /home/yokitane/Code/Cub3D/resources/gybe.png
-WE /home/yokitane/Code/Cub3D/resources/gybe.png
-EA /home/yokitane/Code/Cub3D/resources/gybe.png
+NO ./resources/gybe.png
+SO ./resources/gybe.png
+WE ./resources/gybe.png
+EA ./resources/gybe.png
+
+
+
+111111
+100N01
+100001
+111111
+
 
 11111111111111111111111111
 1111110000110000000000001
