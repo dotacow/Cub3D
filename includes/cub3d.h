@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 19:23:33 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:40:22 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_map_elements
 	t_vector		plane;
 } t_map_elements;
 
+
 /*########## PARSING FUNCTIONS ##########*/
 int				validate_args(int ac, char **av);
 int				is_valid_map(int fd);
@@ -121,7 +122,7 @@ void			free_split(char **split);
 char			*skip_to_map(int fd);
 /*########## INIT FUNCTIONS ##########*/
 void		bzero_map(t_map_elements *map);
-int			init_map(const char *path, t_map_elements *map);
+int			init_map(int fd1, int fd2, t_map_elements *map);
 int			init_map_elements(t_map_elements *map, int fd);
 int			init_map_content(t_map_elements *map, int fd);
 int			read_map(t_map_elements *map, int fd);
@@ -133,5 +134,7 @@ void			bzero_vector(t_vector *v);
 void			bzero_point(t_point *p);
 /*########## CLEANUP FUNCTIONS ##########*/
 void			clean_map(t_map_elements *map);
+/*########## DEBUGGING FUNCTIONS ##########*/
+void			dump_map(t_map_elements *map);
 #endif
 

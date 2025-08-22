@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -MMD -MP -Iincludes -I$(MLXDIR)/include -I$(LIBFTDIR)/includes -Ofast #only use one of g3 or Ofast at a time for best results
+CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -MMD -MP -Iincludes -I$(MLXDIR)/include -I$(LIBFTDIR)/includes -g #-Ofast #only use one of g3 or Ofast at a time for best results
 LDFLAGS = -L$(LIBFTDIR) -L$(MLXDIR)/build -lft -lmlx42 -lm -ldl -lglfw
 
 # Directories

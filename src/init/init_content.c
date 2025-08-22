@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 19:23:08 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:46:15 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int read_map(t_map_elements *map, int fd)
 	offset = 0;
 	while (map->line && offset < (map->rows * map->cols))
 	{
+		fprintf(stderr,"storing LINE: %s\n",map->line);
 		line_len = ft_strlcpy(map->map + offset, map->line, map->cols + 1);
 		right_pad(map->map + offset + line_len, map->cols - line_len, ' ');
 		offset += map->cols;
@@ -78,6 +79,8 @@ int init_map_content(t_map_elements *map, int fd)
 {
 	int	ret;
 
+	if (!map->line)
+		return (ENOMEM);
 	ret = 0;
 	ret = read_map(map, fd);
 	if (ret)

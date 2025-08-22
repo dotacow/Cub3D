@@ -6,35 +6,53 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 18:47:24 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:44:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+int validate_and_init(char *path, t_map_elements *map)
+{
+	int ret;
+	int	fd1;
+	int	fd2;
+	int fd3;
+
+	ret = 0;
+	fd1 = open(path, O_RDONLY);
+	if (fd1 == -1)
+		return (1);
+	fd2 = open(path, O_RDONLY);
+	if (fd2 == -1)
+		ret = 1;
+	fd3 = open(path, O_RDONLY);
+	if (fd3 == -1)
+		ret = 1;
+	ret = !is_valid_map(fd1);
+	if (ret)
+		ft_putendl_fd("Error\nmap misconfiguration!", 2);
+	if(!ret)
+		ret = init_map(fd2,fd3, map);
+	close(fd1);
+	close(fd2);
+	close(fd3);
+	return (ret);
+}
+
 int	main(int argc, char **argv)
 {
-	int	fd;
 	t_map_elements map;
 
-	if (argc != 2 || !validate_args(argc, argv))
+	if (!validate_args(argc, argv))
 		return (0);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (1);
-	if(!is_valid_map(fd))
-	{
-		close(fd);
-		ft_putendl_fd("Error\nmap misconfiguration!", 2);
-		return (1);
-	}
-	close(fd);
-	init_map(argv[1], &map);
+	validate_and_init(argv[1], &map);
 	// if (!errno)
 	//{
 	//	cast_thy_rays(map);
 	//...loops_hooks and mlx stuff...
 	//}
-	//clean_up();
+	dump_map(&map);
+	clean_map(&map);
 	return (errno);
 }

@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/19 18:20:39 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:45:21 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	init_map_elements(t_map_elements *map,int fd)
 	}
 	while (line && !is_map_content(line))
 	{
+		fprintf(stderr,"initmap LINE: %s\n",line);
 		trim_whitespace(line);
 		if(*line)
 			errno = load_data(map, line);
@@ -68,30 +69,17 @@ int	init_map_elements(t_map_elements *map,int fd)
  * @param map pointer to the map elements struct to fill.
  * @return int 0 on success, errno on failure.
  */
-int	init_map(const char *path,t_map_elements *map)
+int	init_map(int fd1, int fd2, t_map_elements *map)
 {
-	int fd;
-
 	bzero_map(map);
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (1);
-	if (get_map_ent(map, fd) == -1)
-	{
-		close(fd);
+	if (get_map_ent(map, fd1) == -1)
 		return(1);
-	}
-	close(fd);
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (1);
-	if ((init_map_elements(map, fd) == -1
-		|| init_map_content(map, fd) == -1))
+	if ((init_map_elements(map, fd2) == -1
+		|| init_map_content(map, fd2) == -1))
 	{
 			if(!errno)
 				errno =  ENOMEM;
 			clean_map(map);
 	}
-	close(fd);
 	return (errno);
 }

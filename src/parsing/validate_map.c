@@ -6,11 +6,12 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/19 19:24:52 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:06:11 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <stdio.h>
 
 
 /**
@@ -43,7 +44,7 @@ static int	validate_line(char *str, t_elements *found)
 		ret = validators[idx](keyval[1], found);
 	else
 		ret = false;
-	free(keyval);
+	free_split(keyval);
 	return (ret);
 }
 
@@ -55,23 +56,27 @@ static int	validate_line(char *str, t_elements *found)
  */
 int is_map_content(char *line)
 {
-	char	*trimmed_line;
+	int		i;
 
-	if (!line || !*line)
+	if (!line || !*line || *line == '\n')
 		return (false);
-	trimmed_line = ft_strtrim(line, " \t\n\r\v\f");
-	if (!trimmed_line || !*trimmed_line)
+	if (!ft_strncmp(line, "NO ", 3) ||
+		!ft_strncmp(line, "SO ", 3) ||
+		!ft_strncmp(line, "WE ", 3) ||
+		!ft_strncmp(line, "EA ", 3) ||
+		!ft_strncmp(line, "F ", 2) ||
+		!ft_strncmp(line, "C ", 2))
+		return (false);
+	i = 0;
+	while (line[i] && line[i] != '\n')
 	{
-		free(trimmed_line);
-		return (false);
+		if (line[i] != '1' && line[i] != '0' && line[i] != ' ' &&
+			line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
+		{
+			return (false);
+		}
+		i++;
 	}
-	free(trimmed_line);
-	if (*line != '1' && *line != '0' && *line != ' '
-		&& ft_strncmp(line, "N", 3) != 0
-		&& ft_strncmp(line, "S", 3) != 0
-		&& ft_strncmp(line, "E", 3) != 0
-		&& ft_strncmp(line, "W", 3) != 0)
-		return (false);
 	return (true);
 }
 
@@ -95,24 +100,21 @@ int	is_valid_map(int fd)
 	t_elements	found[NMAPELEMENTS];
 	int			valid;
 
-	valid = false;
+	valid = true;
 	init_found_arr(found);
 	line = get_next_line(fd);
-	while (line)
+	while (line && !is_map_content(line) && valid )
 	{
-		if(is_map_content(line))
-		{
-			valid = validate_map_content(line, found, fd);
-			break ;
-		}
 		trim_whitespace(line);
 		valid = validate_line(line, found);
 		free(line);
 		line = NULL;
-		if (!valid)
-			break ;
 		line = get_next_line(fd);
 	}
+	if (valid && line)
+		valid = validate_map_content(line, found, fd);
+	else
+		valid = false;
 	if (line)
 		free(line);
 	line = NULL;

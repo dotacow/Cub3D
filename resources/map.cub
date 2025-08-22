@@ -1,0 +1,12 @@
+EA ./resources/gybe.png
+
+F 0,0,0
+C 0,0,255
+NO ./resources/gybe.png
+SO ./resources/gybe.png
+WE ./resources/gybe.png
+
+
+111W111111111111111111111111111111111111111111111111111
+111E111             1
+111N1111111111111111111111111111111111111111
