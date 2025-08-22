@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:50:37 by yokitane          #+#    #+#             */
-/*   Updated: 2024/10/14 17:22:48 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:05:13 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,34 @@ static void	*ft_calloc(size_t nmemb, size_t size)
 	if (!ptr)
 		return (NULL);
 	i = 0;
-	while (i < (nmemb * size))
+	while (i < nmemb * size)
 	{
-		ptr[i] = '\0';
+		ptr[i] = 0;
 		i++;
 	}
 	return ((void *)ptr);
 }
 
-static char	*ft_free(char *str1)
+static char	*ft_free(char *str)
 {
-	if (str1)
-		free(str1);
+	if (str)
+		free(str);
+	str = NULL;
 	return (NULL);
 }
 
 static char	*ft_strchr(char *s, int c)
 {
-	char	*rtr;
-	char	p;
-
-	p = c;
-	rtr = s;
-	while (*rtr)
+	if (!s)
+		return (NULL);
+	while (*s)
 	{
-		if (*rtr == p)
-			return (rtr);
-		rtr++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	if (*rtr == p)
-		return (rtr);
+	if (*s == (char)c)
+		return ((char *)s);
 	return (NULL);
 }
 
@@ -62,7 +60,7 @@ static char	*fill_stash(int fd, char *buffer, char *stash)
 	{
 		byte = read(fd, buffer, BUFFER_SIZE);
 		if (byte == -1)
-			return (free(stash), ft_free(buffer));
+			return (ft_free(stash));
 		if (byte == 0)
 			break ;
 		buffer[byte] = '\0';
@@ -80,23 +78,21 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			nlindex;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	if (!stash)
 		stash = ft_calloc(1, 1);
 	stash = fill_stash(fd, buffer, stash);
-	if (!stash)
-		return (ft_free(stash));
 	free(buffer);
+	if (!stash || *stash == '\0')
+		return (ft_free(stash));
 	nlindex = 0;
 	while (stash[nlindex] && stash[nlindex] != '\n')
 		nlindex++;
-	if (stash[nlindex])
-		nlindex++;
 	line = ft_substr2(stash, 0, nlindex);
-	stash = ft_cutstash(stash, nlindex);
-	if (!stash)
-		return (ft_free(line));
+	stash = ft_cutstash(stash, nlindex + (stash[nlindex] == '\n'));
 	return (line);
 }
