@@ -7,7 +7,6 @@ PARSING= parsing/found_utils.c parsing/validate_textures.c \
 		parsing/validate_map.c parsing/utils.c parsing/validate_rgb.c
 
 UTILS=
-
 DEBUG= utils/debugging_utils.c
 
 RENDER= render/render.c
