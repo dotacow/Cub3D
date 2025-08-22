@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/22 15:47:43 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 16:20:19 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int is_map_content(char *line)
 {
 	int		i;
 
-	if (!line)
+	if (!line || !*line || *line == '\n')
 		return (false);
 	if (!ft_strncmp(line, "NO ", 3) ||
 		!ft_strncmp(line, "SO ", 3) ||
@@ -68,14 +68,14 @@ int is_map_content(char *line)
 		!ft_strncmp(line, "C ", 2))
 		return (false);
 	i = 0;
-	while (line[i])
+	while (line[i] && line[i] != '\n')
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != ' ' &&
 			line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
 		{
 			return (false);
 		}
-	line[i]++;
+		i++;
 	}
 	return (true);
 }
@@ -106,13 +106,16 @@ int	is_valid_map(int fd)
 	while (line && !is_map_content(line) && valid )
 	{
 		trim_whitespace(line);
+		fprintf(stderr,"Validating line: %s\n", line);
 		valid = validate_line(line, found);
 		free(line);
 		line = NULL;
 		line = get_next_line(fd);
 	}
-	if (valid)
+	if (valid && line)
 		valid = validate_map_content(line, found, fd);
+	else
+		valid = false;
 	if (line)
 		free(line);
 	line = NULL;
