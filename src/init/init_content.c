@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:20:55 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:46:15 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int init_map_content(t_map_elements *map, int fd)
 {
 	int	ret;
 
+	if (!map->line)
+		return (ENOMEM);
 	ret = 0;
 	ret = read_map(map, fd);
 	if (ret)

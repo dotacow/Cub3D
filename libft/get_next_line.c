@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 12:50:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:05:13 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 19:24:32 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	*fill_stash(int fd, char *buffer, char *stash)
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*stash;
+	static char	*stash[1024];
 	char		*line;
 	int			nlindex;
 
@@ -83,16 +83,16 @@ char	*get_next_line(int fd)
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	if (!stash)
-		stash = ft_calloc(1, 1);
-	stash = fill_stash(fd, buffer, stash);
+	if (!stash[fd])
+		stash[fd] = ft_calloc(1, 1);
+	stash[fd] = fill_stash(fd, buffer, stash[fd]);
 	free(buffer);
-	if (!stash || *stash == '\0')
-		return (ft_free(stash));
+	if (!stash[fd] || *stash[fd] == '\0')
+		return (ft_free(stash[fd]));
 	nlindex = 0;
-	while (stash[nlindex] && stash[nlindex] != '\n')
+	while (stash[fd][nlindex] && stash[fd][nlindex] != '\n')
 		nlindex++;
-	line = ft_substr2(stash, 0, nlindex);
-	stash = ft_cutstash(stash, nlindex + (stash[nlindex] == '\n'));
+	line = ft_substr2(stash[fd], 0, nlindex);
+	stash[fd] = ft_cutstash(stash[fd], nlindex + (stash[fd][nlindex] == '\n'));
 	return (line);
 }
