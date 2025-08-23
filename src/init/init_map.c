@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:45:21 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 15:57:21 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	bzero_map(t_map_elements *map)
 {
 	if (!map)
 		return;
+	map->line = NULL;
 	map->floor = 0;
 	map->ceiling = 0;
 	map->map = NULL;
@@ -71,7 +72,6 @@ int	init_map_elements(t_map_elements *map,int fd)
  */
 int	init_map(int fd1, int fd2, t_map_elements *map)
 {
-	bzero_map(map);
 	if (get_map_ent(map, fd1) == -1)
 		return(1);
 	if ((init_map_elements(map, fd2) == -1
