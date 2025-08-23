@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 17:14:27 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/08/23 18:35:15 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define NMAPELEMENTS 7
+# define FPI 3.14159265359f
 
 /**
  * @brief enums for the frequency array used to help map validation
@@ -163,6 +164,7 @@ void			bzero_vector(t_vector *v);
 void			bzero_point(t_point *p);
 /*########## CLEANUP FUNCTIONS ##########*/
 void			clean_map(t_map_elements *map);
+void			ihategnl(int fd1, int fd2, int fd3);
 /*########## DEBUGGING FUNCTIONS ##########*/
 void			dump_map(t_map_elements *map);
 #endif

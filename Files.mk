@@ -8,7 +8,7 @@ PARSING= parsing/found_utils.c parsing/validate_textures.c \
 		parsing/flood_fill.c parsing/map_validation.c parsing/utils.c \
 		parsing/validate_rgb.c
 
-UTILS=
+UTILS= utils/ihategnl.c
 DEBUG= utils/debugging_utils.c
 
 RENDER= render/render.c
