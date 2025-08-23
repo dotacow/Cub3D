@@ -6,13 +6,13 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 00:51:22 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 15:23:38 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:59:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int is_rgb_format(char *str)
+int	is_rgb_format(char *str)
 {
 	while (*str)
 	{
@@ -22,12 +22,13 @@ int is_rgb_format(char *str)
 	}
 	return (true);
 }
+
 void	free_split(char **split)
 {
-	int i;
+	int	i;
 
 	if (!split)
-		return;
+		return ;
 	i = 0;
 	while (split[i])
 	{
@@ -38,15 +39,14 @@ void	free_split(char **split)
 	free(split);
 }
 
-int validate_floor(char *val, t_elements *found)
+int	validate_floor(char *val, t_elements *found)
 {
 	char	**rgb;
 	int		r;
 	int		g;
 	int		b;
 
-	if (found[FLOOR] || (ft_count_words(val, ',') != 3)
-			|| !is_rgb_format(val))
+	if (found[FLOOR] || (ft_count_words(val, ',') != 3) || !is_rgb_format(val))
 		return (false);
 	found[FLOOR] = true;
 	rgb = ft_split(val, ',');
@@ -61,15 +61,14 @@ int validate_floor(char *val, t_elements *found)
 	return (true);
 }
 
-int validate_ceil(char *val, t_elements *found)
+int	validate_ceil(char *val, t_elements *found)
 {
 	char	**rgb;
 	int		r;
 	int		g;
 	int		b;
 
-	if (found[CEIL] || (ft_count_words(val, ',') != 3)
-			|| !is_rgb_format(val))
+	if (found[CEIL] || (ft_count_words(val, ',') != 3) || !is_rgb_format(val))
 		return (false);
 	found[CEIL] = true;
 	rgb = ft_split(val, ',');

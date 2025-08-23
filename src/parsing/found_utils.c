@@ -17,21 +17,21 @@
  * usage: found[NO|SO...|MAP] = true on found
  * @param found the frequency array to check for previously found elements
  */
-void init_found_arr(t_elements *found)
-{
-	int i;
-
-	i = -1;
-	while(++i < NMAPELEMENTS)
-		found[i] = false;
-}
-
-int is_all_found(t_elements *found)
+void	init_found_arr(t_elements *found)
 {
 	int	i;
 
 	i = -1;
-	while(++i < NMAPELEMENTS)
+	while (++i < NMAPELEMENTS)
+		found[i] = false;
+}
+
+int	is_all_found(t_elements *found)
+{
+	int	i;
+
+	i = -1;
+	while (++i < NMAPELEMENTS)
 		if (found[i] == false)
 			return (false);
 	return (true);

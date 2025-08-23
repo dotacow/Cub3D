@@ -12,8 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-
-int		ft_isspace(char c)
+int	ft_isspace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n')
 		return (1);
@@ -27,14 +26,14 @@ void	trim_whitespace(char *str)
 	size_t	len;
 
 	if (!str || !*str)
-		return;
+		return ;
 	start = str;
 	while (*start && ft_isspace(*start))
 		start++;
 	if (!*start)
 	{
 		*str = '\0';
-		return;
+		return ;
 	}
 	end = start + ft_strlen(start) - 1;
 	while (end > start && ft_isspace(*end))
@@ -72,7 +71,7 @@ void	check_name(char *name)
 	}
 }
 
-int validate_args(int ac, char **av)
+int	validate_args(int ac, char **av)
 {
 	int	fd;
 
