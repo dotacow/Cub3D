@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:40:22 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:23:38 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void			bzero_vector(t_vector *v);
 void			bzero_point(t_point *p);
 /*########## CLEANUP FUNCTIONS ##########*/
 void			clean_map(t_map_elements *map);
+void			ihategnl(int fd1, int fd2, int fd3);
 /*########## DEBUGGING FUNCTIONS ##########*/
 void			dump_map(t_map_elements *map);
 #endif

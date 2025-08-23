@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 15:10:11 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 18:01:40 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/22 20:13:10 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void dump_map(t_map_elements *map)
 		return;
 	}
 
-	fprintf(stderr,"floor: %x, ceiling: %x\n", map->floor, map->ceiling);
+	fprintf(stderr,"floor: 0x%.6X, ceiling: 0x%.6X\n", map->floor, map->ceiling);
 	fprintf(stderr,"Player pos: (%.2f, %.2f)\n", map->player.tail.x, map->player.tail.y);
 	fprintf(stderr,"Player dir: magnitude=%.2f, theta=%.2f degrees\n", map->player.magnitude, map->player.theta);
 	fprintf(stderr,"Map (%i rows x %i cols):\n", map->rows, map->cols);
