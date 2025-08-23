@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 15:57:21 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:17:17 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	init_map_elements(t_map_elements *map,int fd)
 	}
 	while (line && !is_map_content(line))
 	{
-		fprintf(stderr,"initmap LINE: %s\n",line);
 		trim_whitespace(line);
 		if(*line)
 			errno = load_data(map, line);
