@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 15:57:22 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 16:32:10 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,16 @@ int validate_and_init(char *path, t_map_elements *map)
 	bzero_map(map);
 	ret = 0;
 	fd1 = open(path, O_RDONLY);
-	if (fd1 == -1)
-		return (1);
 	fd2 = open(path, O_RDONLY);
-	if (fd2 == -1)
-		ret = 1;
 	fd3 = open(path, O_RDONLY);
-	if (fd3 == -1)
+	if (fd1 == -1 || fd2 == -1 || fd3 == -1)
 		ret = 1;
 	ret = !is_valid_map(fd1);
 	if (ret)
 		ft_putendl_fd("Error\nmap misconfiguration!", 2);
 	if(!ret)
 		ret = init_map(fd2,fd3, map);
+	ihategnl(fd1, fd2, fd3);
 	close(fd1);
 	close(fd2);
 	close(fd3);
