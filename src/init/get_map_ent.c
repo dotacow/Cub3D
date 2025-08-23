@@ -6,12 +6,11 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:19:43 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 17:02:33 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 18:16:19 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <math.h>
 
 char *skip_to_map(int fd)
 {
@@ -80,13 +79,11 @@ int get_map_ent(t_map_elements *map, int fd)
 	int		y;
 
 	line = skip_to_map(fd);
-	fprintf(stderr,"DEBUG: First map line:%s\n",line);
 	if (!line)
 		return (-1);
 	y = 0;
 	while (line && is_map_content(line))
 	{
-		fprintf(stderr,"DEBUG: Read line:%s\n",line);
 		x = parse_map_line(line, map, y);
 		if (x > map->cols)
 			map->cols = x;
