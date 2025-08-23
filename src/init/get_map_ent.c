@@ -6,11 +6,12 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:19:43 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:27:09 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 17:02:33 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <math.h>
 
 char *skip_to_map(int fd)
 {
@@ -37,11 +38,11 @@ char *skip_to_map(int fd)
 static float get_cardinal_direction(char c)
 {
 	if (c == 'N')
-		return (90.0f);
+		return (FPI / 2.0f);
 	else if (c == 'S')
-		return (270.0f);
+		return (FPI * 1.5f);
 	else if (c == 'W')
-		return (180.0f);
+		return (FPI);
 	return (0.0f);
 }
 

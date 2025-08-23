@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 16:23:38 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 17:01:54 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define NMAPELEMENTS 7
+# define FPI 3.14159265359f
 
 /**
  * @brief enums for the frequency array used to help map validation
