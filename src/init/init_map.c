@@ -15,7 +15,7 @@
 void	bzero_map(t_map_elements *map)
 {
 	if (!map)
-		return;
+		return ;
 	map->line = NULL;
 	map->floor = 0;
 	map->ceiling = 0;
@@ -37,7 +37,7 @@ void	bzero_map(t_map_elements *map)
  * @param fd map fd
  * @return int 0 on success, -1 on failure.
  */
-int	init_map_elements(t_map_elements *map,int fd)
+int	init_map_elements(t_map_elements *map, int fd)
 {
 	char	*line;
 
@@ -50,7 +50,7 @@ int	init_map_elements(t_map_elements *map,int fd)
 	while (line && !is_map_content(line))
 	{
 		trim_whitespace(line);
-		if(*line)
+		if (*line)
 			errno = load_data(map, line);
 		free(line);
 		if (errno)
@@ -58,7 +58,7 @@ int	init_map_elements(t_map_elements *map,int fd)
 		line = get_next_line(fd);
 	}
 	if (line)
-		map->line  = line;
+		map->line = line;
 	return (0);
 }
 
@@ -72,13 +72,12 @@ int	init_map_elements(t_map_elements *map,int fd)
 int	init_map(int fd1, int fd2, t_map_elements *map)
 {
 	if (get_map_ent(map, fd1) == -1)
-		return(1);
-	if ((init_map_elements(map, fd2) == -1
-		|| init_map_content(map, fd2) == -1))
+		return (1);
+	if ((init_map_elements(map, fd2) == -1 || init_map_content(map, fd2) == -1))
 	{
-			if(!errno)
-				errno =  ENOMEM;
-			clean_map(map);
+		if (!errno)
+			errno = ENOMEM;
+		clean_map(map);
 	}
 	return (errno);
 }

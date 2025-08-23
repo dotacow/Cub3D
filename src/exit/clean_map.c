@@ -12,8 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-
-static void clean_textures(t_map_elements *map)
+static void	clean_textures(t_map_elements *map)
 {
 	if (map->north)
 	{
@@ -37,7 +36,6 @@ static void clean_textures(t_map_elements *map)
 	}
 }
 
-
 void	clean_map(t_map_elements *map)
 {
 	if (map->map)
@@ -45,7 +43,7 @@ void	clean_map(t_map_elements *map)
 		free(map->map);
 		map->map = NULL;
 	}
-	if(map->line)
+	if (map->line)
 	{
 		free(map->line);
 		map->line = NULL;

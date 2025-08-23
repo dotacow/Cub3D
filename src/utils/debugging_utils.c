@@ -10,23 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-void dump_map(t_map_elements *map)
+void	dump_map(t_map_elements *map)
 {
-	int i;
+	int	i;
 
 	if (!map || !map->map)
 	{
 		ft_putendl_fd("Map is NULL", 2);
-		return;
+		return ;
 	}
-
-	fprintf(stderr,"floor: 0x%.6X, ceiling: 0x%.6X\n", map->floor, map->ceiling);
-	fprintf(stderr,"Player pos: (%.2f, %.2f)\n", map->player.tail.x, map->player.tail.y);
-	fprintf(stderr,"Player dir: magnitude=%.2f, theta= %f rad\n", map->player.magnitude, (map->player.theta * 180 / M_PI));
-	fprintf(stderr,"Map (%i rows x %i cols):\n", map->rows, map->cols);
-
+	fprintf(stderr, "floor: 0x%.6X, ceiling: 0x%.6X\n", map->floor,
+		map->ceiling);
+	fprintf(stderr, "Player pos: (%.2f, %.2f)\n", map->player.tail.x,
+		map->player.tail.y);
+	fprintf(stderr, "Player dir: magnitude=%.2f, theta= %f rad\n",
+		map->player.magnitude, (map->player.theta * 180 / M_PI));
+	fprintf(stderr, "Map (%i rows x %i cols):\n", map->rows, map->cols);
 	i = 0;
 	while (i < (int)(map->rows * map->cols))
 	{
