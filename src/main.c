@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:44:30 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 17:21:34 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int validate_and_init(char *path, t_map_elements *map)
 	int	fd2;
 	int fd3;
 
+	bzero_map(map);
 	ret = 0;
 	fd1 = open(path, O_RDONLY);
 	if (fd1 == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:40:22 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/23 17:14:27 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,41 @@ typedef struct s_map_elements
 /*########## PARSING FUNCTIONS ##########*/
 int				validate_args(int ac, char **av);
 int				is_valid_map(int fd);
+// map parser functions
+int				validate_line(char *str, t_elements *found);
+int				is_map_content(char *line);
+int				setup_map_data(char *line, int fd, char ***lines, char ***map_copy,
+					int *rows, int *cols);
+int				validate_map_content(char *line, t_elements *found, int fd);
+// map reader functions
+int				process_line_length(char *line, int *max_cols);
+void			init_lines_array(char **lines, int max_lines);
+char			**read_remaining_lines(int fd, char **lines, int *count,
+					int max_lines, int *max_cols);
+char			**read_all_map_lines(int fd, char *first_line, int *rows, int *cols);
+int				process_map_validation(char **lines, char **map_copy, int rows,
+					int cols);
+// map memory functions
+void			init_map_copy(char **map_copy, int rows);
+int				allocate_row(char **map_copy, int row, int cols);
+void			fill_row(char **map_copy, char **lines, int row, int cols);
+char			**create_2d_map_copy(char **lines, int rows, int cols);
+void			free_lines(char **lines, int count);
+// flood fill functions
+void			flood_fill(char **map, int row, int col, int total_rows,
+					int total_cols);
+int				find_player_position(char **map, int rows, int cols,
+					int *player_row, int *player_col);
+void			free_temp_map(char **temp_map, int rows);
+char			**create_temp_map(char **map_copy, int rows, int cols);
+int				check_boundary_breach(char **temp_map, int rows, int cols);
+// map validation functions
+int				validate_map_enclosure(char **map_copy, int rows, int cols);
+void			free_map_copy(char **map_copy, int rows);
 //parsing utils
 int				ft_isspace(char c);
 void			trim_whitespace(char *str);
 void			check_name(char *name);
-int				is_map_content(char *line);
 int				is_rgb_format(char *str);
 // frequency array utils
 void			init_found_arr(t_elements *found);
@@ -116,7 +146,6 @@ int				validate_we(char *val, t_elements *found);
 int				validate_ea(char *val, t_elements *found);
 int				validate_floor(char *val, t_elements *found);
 int				validate_ceil(char *val, t_elements *found);
-int				validate_map_content(char *line, t_elements *found, int fd);
 /*########## GENERAL FUNCTIONS ##########*/
 void			free_split(char **split);
 char			*skip_to_map(int fd);
