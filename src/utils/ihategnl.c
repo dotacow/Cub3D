@@ -6,20 +6,25 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 16:20:53 by yokitane          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2025/08/24 17:21:57 by yokitane         ###   ########.fr       */
+=======
 /*   Updated: 2025/08/23 19:01:53 by yokitane         ###   ########.fr       */
+>>>>>>> 726549090acb544df460e047e0d96e1e8f3b8d9f
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 /**
-* @brief this is to get rid of the still reachable memory leak
-* from get_next_line
-* @note: not mandatory, but why not, will just remove if it causes issues.
-* @param fd1
-* @param fd2
-* @param fd3
-*/
+
+ * @brief this is to get rid of the still reachable memory leak
+ * from get_next_line
+ * @note: not mandatory, but why not, will just remove if it causes issues.
+ * @param fd1
+ * @param fd2
+ * @param fd3
+ */
 void	ihategnl(int fd1, int fd2, int fd3)
 {
 	char	*l1;

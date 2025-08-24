@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 19:02:13 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:29:43 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	validate_and_init(char *path, t_map_elements *map)
 		ft_putendl_fd("Error\nmap misconfiguration!", 2);
 	if (!ret)
 		ret = init_map(fd2, fd3, map);
-	ihategnl(fd1, fd2, fd3);
+	// ihategnl(fd1, fd2, fd3);
 	close(fd1);
 	close(fd2);
 	close(fd3);
