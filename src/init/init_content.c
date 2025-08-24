@@ -6,12 +6,11 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 18:16:31 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:19:04 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
 
 /**
  * @brief right pads a string with @param pad_char a given n times.
@@ -19,11 +18,11 @@
  * @param str the string to pad
  * @param n ntimes to insert the pad_char
  */
-static void right_pad(char *str, int n, char pad_char)
- {
-	int i;
+static void	right_pad(char *str, int n, char pad_char)
+{
+	int	i;
 
-	if(n <= 0)
+	if (n <= 0)
 		return ;
 	i = 0;
 	while (i < n)
@@ -31,19 +30,21 @@ static void right_pad(char *str, int n, char pad_char)
 		str[i] = pad_char;
 		i++;
 	}
- }
+}
 
 /**
- * @brief reads the map content from the file descriptor and stores it in the map struct
+
+ * @brief reads the map content from the file descriptor and
+ *		 stores it in the map struct
  *
  * @param map
  * @param fd
  * @return int
  */
-int read_map(t_map_elements *map, int fd)
+int	read_map(t_map_elements *map, int fd)
 {
-	int		offset;
-	int		line_len;
+	int	offset;
+	int	line_len;
 
 	map->map = ft_calloc((map->rows * map->cols) + 1, sizeof(char));
 	if (!map->map)
@@ -74,7 +75,7 @@ int read_map(t_map_elements *map, int fd)
  * @param fd	map file fd.
  * @return int 0 on success, errno val on failure.
  */
-int init_map_content(t_map_elements *map, int fd)
+int	init_map_content(t_map_elements *map, int fd)
 {
 	int	ret;
 

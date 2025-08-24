@@ -12,9 +12,9 @@
 
 #include "../../includes/cub3d.h"
 
-char *skip_to_map(int fd)
+char	*skip_to_map(int fd)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd);
 	if (!line || is_map_content(line))
@@ -34,7 +34,7 @@ char *skip_to_map(int fd)
 	return (line);
 }
 
-static float get_cardinal_direction(char c)
+static float	get_cardinal_direction(char c)
 {
 	if (c == 'N')
 		return (FPI / 2.0f);
@@ -45,15 +45,15 @@ static float get_cardinal_direction(char c)
 	return (0.0f);
 }
 
-static int parse_map_line(char *line, t_map_elements *map, int y)
+static int	parse_map_line(char *line, t_map_elements *map, int y)
 {
 	int	x;
 
 	x = 0;
-	while(line[x])
+	while (line[x])
 	{
-		if (line[x] == 'N' || line[x] == 'S'
-			|| line[x] == 'E' || line[x] == 'W')
+		if (line[x] == 'N' || line[x] == 'S' || line[x] == 'E'
+			|| line[x] == 'W')
 		{
 			map->player.tail.x = x;
 			map->player.tail.y = y;
@@ -72,7 +72,7 @@ static int parse_map_line(char *line, t_map_elements *map, int y)
  * @param fd file descriptor of the map file
  * @return int 0 on success,-1 on failure.
  */
-int get_map_ent(t_map_elements *map, int fd)
+int	get_map_ent(t_map_elements *map, int fd)
 {
 	char	*line;
 	int		x;

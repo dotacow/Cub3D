@@ -24,14 +24,8 @@ int	validate_line(char *str, t_elements *found)
 	int		idx;
 	int		ret;
 
-    static int (*validators[])(char *, t_elements *) = {
-        validate_no,
-        validate_so,
-        validate_we,
-        validate_ea,
-        validate_floor,
-        validate_ceil
-    };
+	static int (*validators[])(char *, t_elements *) = {validate_no,
+		validate_so, validate_we, validate_ea, validate_floor, validate_ceil};
 	if (!*str)
 		return (1);
 	keyval = ft_split(str, ' ');

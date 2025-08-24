@@ -6,18 +6,18 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 21:22:40 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:18:35 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int validate_and_init(char *path, t_map_elements *map)
+int	validate_and_init(char *path, t_map_elements *map)
 {
-	int ret;
+	int	ret;
 	int	fd1;
 	int	fd2;
-	int fd3;
+	int	fd3;
 
 	bzero_map(map);
 	ret = 0;
@@ -29,17 +29,18 @@ int validate_and_init(char *path, t_map_elements *map)
 	ret = !is_valid_map(fd1);
 	if (ret)
 		ft_putendl_fd("Error\nmap misconfiguration!", 2);
-	if(!ret)
-		ret = init_map(fd2,fd3, map);
+	if (!ret)
+		ret = init_map(fd2, fd3, map);
 	// ihategnl(fd1, fd2, fd3);
 	close(fd1);
 	close(fd2);
 	close(fd3);
 	return (ret);
 }
+
 /**
  * @brief cub3d entry point
- * @important: error is used only for error in validation and init,errno(or seperate marker) for rendering.
+
  * @param argc
  * @param argv
  * @return int

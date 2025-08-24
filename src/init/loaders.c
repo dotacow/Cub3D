@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static int load_texture(t_map_elements *map,char *key, char *val)
+static int	load_texture(t_map_elements *map, char *key, char *val)
 {
 	if (!ft_strncmp(key, "NO", 3))
 	{
@@ -41,10 +41,10 @@ static int load_texture(t_map_elements *map,char *key, char *val)
 	return (0);
 }
 
-static int load_color(t_map_elements *map, char *key, char *val)
+static int	load_color(t_map_elements *map, char *key, char *val)
 {
-	char **rgb;
-	unsigned int color;
+	char			**rgb;
+	unsigned int	color;
 
 	color = 0;
 	rgb = ft_split(val, ',');
@@ -53,8 +53,7 @@ static int load_color(t_map_elements *map, char *key, char *val)
 		free_split(rgb);
 		return (ENOMEM);
 	}
-	color = (ft_atoi(rgb[0]) << 16) | (ft_atoi(rgb[1]) << 8)
-		| ft_atoi(rgb[2]);
+	color = (ft_atoi(rgb[0]) << 16) | (ft_atoi(rgb[1]) << 8) | ft_atoi(rgb[2]);
 	if (key[0] == 'F')
 		map->floor = color;
 	else
@@ -65,8 +64,8 @@ static int load_color(t_map_elements *map, char *key, char *val)
 
 int	load_data(t_map_elements *map, char *line)
 {
-	char **keyval;
-	int ret;
+	char	**keyval;
+	int		ret;
 
 	ret = 0;
 	keyval = ft_split(line, ' ');

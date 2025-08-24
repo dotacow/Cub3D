@@ -56,8 +56,8 @@ void	init_lines_array(char **lines, int max_lines)
  * @param max_cols pointer to maximum columns counter
  * @return lines array
  */
-char	**read_remaining_lines(int fd, char **lines, int *count,
-		int max_lines, int *max_cols)
+char	**read_remaining_lines(int fd, char **lines, int *count, int max_lines,
+		int *max_cols)
 {
 	char	*current_line;
 

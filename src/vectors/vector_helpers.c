@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:13:51 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/24 17:04:00 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:21:26 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	bzero_point(t_point *p)
 {
 	if (!p)
-		return;
+		return ;
 	p->x = 0.0f;
 	p->y = 0.0f;
 }
@@ -23,7 +23,7 @@ void	bzero_point(t_point *p)
 void	bzero_vector(t_vector *v)
 {
 	if (!v)
-		return;
+		return ;
 	bzero_point(&v->tail);
 	v->magnitude = 0.0f;
 	v->theta = 0.0f;
@@ -41,6 +41,7 @@ float	get_mag(t_vector *v)
 		return (0.0f);
 	return (sqrtf((v->tail.x * v->tail.x) + (v->tail.y * v->tail.y)));
 }
+
 /**
  * @brief applies a rotation matrix to a vector
  * @param v vector to rotate
@@ -48,7 +49,7 @@ float	get_mag(t_vector *v)
  */
 void	rotate_vector(t_vector *v, float angle)
 {
-	t_point prime;
+	t_point	prime;
 
 	if (!v)
 		return ;

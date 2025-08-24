@@ -51,8 +51,8 @@ void	flood_fill(char **map, int row, int col, int total_rows, int total_cols)
  * @param player_col pointer to store player column
  * @return 1 if exactly one player found, 0 otherwise
  */
-int	find_player_position(char **map, int rows, int cols,
-		int *player_row, int *player_col)
+int	find_player_position(char **map, int rows, int cols, int *player_row,
+		int *player_col)
 {
 	int	i;
 	int	j;
