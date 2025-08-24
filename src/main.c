@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/24 17:18:35 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:29:43 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	validate_and_init(char *path, t_map_elements *map)
 
 /**
  * @brief cub3d entry point
-
  * @param argc
  * @param argv
  * @return int

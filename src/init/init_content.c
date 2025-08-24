@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 23:05:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/24 17:19:04 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 17:24:23 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ static void	right_pad(char *str, int n, char pad_char)
 
 /**
 
- * @brief reads the map content from the file descriptor and
- *		 stores it in the map struct
- *
+ @brief reads the map content from the file descriptor
+ * and stores it in the map struct
  * @param map
  * @param fd
  * @return int
