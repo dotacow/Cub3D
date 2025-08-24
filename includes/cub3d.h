@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 18:35:15 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 15:57:22 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_point
 	float	y;
 } t_point;
 
-/** @note :I dont know if this is actually needed, we'll see.
+/**
  * @brief magnitude AND direction (⌐■_■)
  * @param tail: the point from which the vector starts
  * @param magnitude: the length of the vector
@@ -151,17 +151,21 @@ int				validate_ceil(char *val, t_elements *found);
 void			free_split(char **split);
 char			*skip_to_map(int fd);
 /*########## INIT FUNCTIONS ##########*/
-void		bzero_map(t_map_elements *map);
-int			init_map(int fd1, int fd2, t_map_elements *map);
-int			init_map_elements(t_map_elements *map, int fd);
-int			init_map_content(t_map_elements *map, int fd);
-int			read_map(t_map_elements *map, int fd);
-int			get_map_ent(t_map_elements *map, int fd);
+void			bzero_map(t_map_elements *map);
+int				init_map(int fd1, int fd2, t_map_elements *map);
+int				init_map_elements(t_map_elements *map, int fd);
+int				init_map_content(t_map_elements *map, int fd);
+int				read_map(t_map_elements *map, int fd);
+int				get_map_ent(t_map_elements *map, int fd);
 /*########## LOADING FUNCTIONS ##########*/
-int			load_data(t_map_elements *map, char *line);
+int				load_data(t_map_elements *map, char *line);
 /*########## MATH FUNCTIONS ##########*/
+void			rotate_vector(t_vector *v, float angle);
+void			veccpy(t_vector *dest, t_vector src);
 void			bzero_vector(t_vector *v);
 void			bzero_point(t_point *p);
+float			get_mag(t_vector *v);
+float			deg_to_rad(float degrees);
 /*########## CLEANUP FUNCTIONS ##########*/
 void			clean_map(t_map_elements *map);
 void			ihategnl(int fd1, int fd2, int fd3);
