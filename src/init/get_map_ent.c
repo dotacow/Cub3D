@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:19:43 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 18:16:19 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 18:17:59 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ char	*skip_to_map(int fd)
 	return (line);
 }
 
+/**
+ * @brief translates char of player in matrix to radian.
+ * @note if the way I parse the matrix (reversed y signage) causes problems,
+ * I can probably just mirror Y angles here.
+ * @param c
+ * @return float
+ */
 static float	get_cardinal_direction(char c)
 {
 	if (c == 'N')
