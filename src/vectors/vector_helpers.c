@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:13:51 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/24 17:29:29 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/24 19:00:43 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ void	rotate_vector(t_vector *v, float angle)
 
 	if (!v)
 		return ;
-	angle = angle * (FPI / 180.0f);
+	angle = angle * (FPI 	/ 180.0f);
 	prime.x = v->tail.x * cosf(angle) - v->tail.y * sinf(angle);
 	prime.y = v->tail.x * sinf(angle) + v->tail.y * cosf(angle);
+	v->theta += angle;
 	v->tail.x = prime.x;
 	v->tail.y = prime.y;
 }
