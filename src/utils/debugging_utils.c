@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 15:10:11 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 17:27:19 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/26 20:50:20 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void	dump_map(t_map_elements *map)
 		map->player.magnitude, (map->player.theta * 180 / M_PI));
 	fprintf(stderr, "Map (%i rows x %i cols):\n", map->rows, map->cols);
 	i = 0;
-	while (i < (int)(map->rows * map->cols))
+	while (i < (int)(map->rows))
 	{
-		if (i && !(i % (int)map->cols))
-			ft_putchar_fd('\n', 2);
-		ft_putchar_fd(map->map[i], 2);
+		write(2, map->map + (i * (map->cols) ), map->cols);
+		write(2, "\n", 1);
 		i++;
 	}
 	ft_putchar_fd('\n', 2);
