@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/27 19:46:28 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:08:15 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void				bzero_point(t_point *p);
 float				get_mag(t_vector *v);
 float				deg_to_rad(float degrees);
 /*######## RAYCASTING FUNCTIONS ########*/
-int					cast_thy_rays(t_map_elements map,t_ftmlx *mlx);
+int					cast_thy_rays(t_map_elements *map,t_ftmlx *mlx);
 /*########### CLEANUP FUNCTIONS ##########*/
 void				clean_map(t_map_elements *map);
 void				clean_mlx(t_ftmlx *ftmlx);

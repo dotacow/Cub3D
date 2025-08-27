@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/27 20:06:43 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/27 20:08:16 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	ftmlx.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	if (!errno && ftmlx.mlx)
 	{
-		errno = cast_thy_rays(map, &ftmlx);
+		errno = cast_thy_rays(&map, &ftmlx);
 		mlx_loop_hook(ftmlx.mlx, NULL, NULL);//add hook later
 		mlx_loop(ftmlx.mlx);
 	// ...loops_hooks and mlx stuff...
