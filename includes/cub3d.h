@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/24 18:41:22 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:46:28 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 
 # define NMAPELEMENTS 7
 # define FPI 3.14159265359f
-
+# define WIDTH 840
+# define HEIGHT 640
 /**
  * @brief enums for the frequency array used to help map validation
  *
@@ -41,6 +42,16 @@ typedef enum e_elements
 	CEIL,
 	MAP
 }					t_elements;
+
+/**
+ * @brief a wrapper struct for mlx_t and all related stuff.
+ * @note: will add members as needed.
+ * @param mlx the mlx_t pointer
+ */
+typedef struct s_ftmlx
+{
+	mlx_t		*mlx;
+}	t_ftmlx;
 
 /**
  * @brief a cartesian point in 2D space
@@ -168,9 +179,12 @@ void				bzero_vector(t_vector *v);
 void				bzero_point(t_point *p);
 float				get_mag(t_vector *v);
 float				deg_to_rad(float degrees);
-/*########## CLEANUP FUNCTIONS ##########*/
+/*######## RAYCASTING FUNCTIONS ########*/
+int					cast_thy_rays(t_map_elements map,t_ftmlx *mlx);
+/*########### CLEANUP FUNCTIONS ##########*/
 void				clean_map(t_map_elements *map);
-void				ihategnl(int fd1, int fd2, int fd3);
-/*########## DEBUGGING FUNCTIONS ##########*/
+void				clean_mlx(t_ftmlx *ftmlx);
+void				clean_all(t_map_elements *map,t_ftmlx *ftmlx);
+/*######### DEBUGGING FUNCTIONS ##########*/
 void				dump_map(t_map_elements *map);
 #endif
