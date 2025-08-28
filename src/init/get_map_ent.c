@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:19:43 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/27 19:53:14 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:14:16 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,14 @@ static int	parse_map_line(char *line, t_map_elements *map, int y)
 			map->player.tail.x = x;
 			map->player.tail.y = y;
 			map->player.theta = get_cardinal_direction(line[x]);
-			map->player.magnitude = 1.0f;
+			map->player.head = get_head(&map->player, 1.0f);
 		}
 		x++;
 	}
+	map->plane.tail.x = map->player.tail.x;
+	map->plane.tail.y = map->player.tail.y;
+	map->plane.theta = map->player.theta + (FPI / 2.0f);
+	map->plane.head = get_head(&map->plane, 0.66f);
 	return (x);
 }
 

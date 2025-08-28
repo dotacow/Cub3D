@@ -1,38 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_mlx.c                                        :+:      :+:    :+:   */
+/*   cast_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 19:36:22 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/28 15:17:48 by yokitane         ###   ########.fr       */
+/*   Created: 2025/08/28 14:56:38 by yokitane          #+#    #+#             */
+/*   Updated: 2025/08/28 16:00:42 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	clean_mlx(t_ftmlx *ftmlx)
+int	cast_thy_rays(t_map_elements *map, t_ftmlx *mlx)
 {
-	if (ftmlx)
-	{
-		if (ftmlx->mlx)
-		{
-			mlx_terminate(ftmlx->mlx);
-			ftmlx->mlx = NULL;
-		}
-		if (ftmlx->img)
-		{
-			mlx_delete_image(ftmlx->mlx, ftmlx->img);
-			ftmlx->img = NULL;
-		}
-	}
-	ftmlx = NULL;
-}
-
-void	clean_all(t_map_elements *map, t_ftmlx *ftmlx)
-{
-	clean_map(map);
-	clean_mlx(ftmlx);
-	exit(errno);
+	 
 }

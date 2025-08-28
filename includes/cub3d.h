@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/27 20:08:15 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/28 16:34:18 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define FPI 3.14159265359f
 # define WIDTH 840
 # define HEIGHT 640
+# define FOV 0.66f
+
 /**
  * @brief enums for the frequency array used to help map validation
  *
@@ -51,6 +53,7 @@ typedef enum e_elements
 typedef struct s_ftmlx
 {
 	mlx_t		*mlx;
+	mlx_image_t	*img;
 }	t_ftmlx;
 
 /**
@@ -72,7 +75,7 @@ typedef struct s_point
 typedef struct s_vector
 {
 	t_point			tail;
-	float			magnitude;
+	t_point			head;
 	float			theta;
 }					t_vector;
 
@@ -96,7 +99,7 @@ typedef struct s_vector
 typedef struct s_map_elements
 {
 	int				rows;
-	t_vector		player;
+	int				cols;
 	unsigned int	floor;
 	unsigned int	ceiling;
 	char			*map;
@@ -105,9 +108,11 @@ typedef struct s_map_elements
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	int				cols;
+	t_vector		player;
 	t_vector		plane;
 }					t_map_elements;
+
+
 
 /*########## PARSING FUNCTIONS ##########*/
 int					validate_args(int ac, char **av);
@@ -179,6 +184,7 @@ void				bzero_vector(t_vector *v);
 void				bzero_point(t_point *p);
 float				get_mag(t_vector *v);
 float				deg_to_rad(float degrees);
+t_point				get_head(t_vector *v, float mag);
 /*######## RAYCASTING FUNCTIONS ########*/
 int					cast_thy_rays(t_map_elements *map,t_ftmlx *mlx);
 /*########### CLEANUP FUNCTIONS ##########*/

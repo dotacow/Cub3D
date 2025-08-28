@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:13:51 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/24 19:00:43 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:07:31 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	bzero_vector(t_vector *v)
 	if (!v)
 		return ;
 	bzero_point(&v->tail);
-	v->magnitude = 0.0f;
+	bzero_point(&v->head);
 	v->theta = 0.0f;
 }
 
@@ -37,9 +37,25 @@ void	bzero_vector(t_vector *v)
  */
 float	get_mag(t_vector *v)
 {
+	float dy;
+	float dx;
+
 	if (!v)
 		return (0.0f);
-	return (sqrtf((v->tail.x * v->tail.x) + (v->tail.y * v->tail.y)));
+	dy = v->head.y - v->tail.y;
+	dx = v->head.x - v->tail.x;
+	return sqrtf((dy*dy) + (dx*dx));
+}
+
+t_point	get_head(t_vector *v, float mag)
+{
+	t_point	head;
+
+	if (!v)
+		return ((t_point){0.0f, 0.0f});
+	head.x = v->tail.x + (mag * cosf(v->theta));
+	head.y = v->tail.y + (mag * sinf(v->theta));
+	return (head);
 }
 
 /**
@@ -53,10 +69,11 @@ void	rotate_vector(t_vector *v, float angle)
 
 	if (!v)
 		return ;
-	angle = angle * (FPI 	/ 180.0f);
+	angle = angle * (FPI / 180.0f);
 	prime.x = v->tail.x * cosf(angle) - v->tail.y * sinf(angle);
 	prime.y = v->tail.x * sinf(angle) + v->tail.y * cosf(angle);
 	v->theta += angle;
 	v->tail.x = prime.x;
 	v->tail.y = prime.y;
+	v->head = get_head(v, get_mag(v));
 }
