@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:13:51 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/29 15:54:25 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/29 20:56:27 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_point	get_head(t_vector *v, float mag)
 /**
  * @brief applies a rotation matrix to a vector
  * @param v vector to rotate
- * @param angle angle in degrees to rotate by
+ * @param angle angle in radian to rotate by
  */
 void	rotate_vector(t_vector *v, float angle)
 {
@@ -69,7 +69,6 @@ void	rotate_vector(t_vector *v, float angle)
 
 	if (!v)
 		return ;
-	angle = angle * (FPI / 180.0f);
 	prime.x = v->tail.x * cosf(angle) - v->tail.y * sinf(angle);
 	prime.y = v->tail.x * sinf(angle) + v->tail.y * cosf(angle);
 	v->theta += angle;

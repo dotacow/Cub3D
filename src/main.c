@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/29 19:31:41 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/29 20:56:15 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,9 @@ int	main(int argc, char **argv)
 	errno = validate_and_init(argv[1],&game.map);
 	game.mlx.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	game.mlx.img = mlx_new_image(game.mlx.mlx, WIDTH, HEIGHT);
-	if (!errno && game.mlx.mlx && game.mlx.img)
+	if (game.mlx.mlx && game.mlx.img)
 	{
+		mlx_image_to_window(game.mlx.mlx, game.mlx.img, 0, 0);
 		mlx_loop_hook(game.mlx.mlx, cast_thy_rays, &game);
 		mlx_loop(game.mlx.mlx);
 	}
