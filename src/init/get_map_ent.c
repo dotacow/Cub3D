@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:19:43 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/28 18:14:16 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:57:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ static int	parse_map_line(char *line, t_map_elements *map, int y)
 		if (line[x] == 'N' || line[x] == 'S' || line[x] == 'E'
 			|| line[x] == 'W')
 		{
-			map->player.tail.x = x;
-			map->player.tail.y = y;
+			map->player.tail.x = x + 0.5f;
+			map->player.tail.y = y + 0.5f;
 			map->player.theta = get_cardinal_direction(line[x]);
 			map->player.head = get_head(&map->player, 1.0f);
 		}

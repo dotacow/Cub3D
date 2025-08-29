@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/27 20:08:16 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:54:53 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,20 @@ int	validate_and_init(char *path, t_map_elements *map)
  */
 int	main(int argc, char **argv)
 {
-	t_map_elements	map;
-	t_ftmlx			ftmlx;
+	t_game	game;
 
 	errno = 0;
 	if (!validate_args(argc, argv))
 		return (1);
-	errno = validate_and_init(argv[1], &map);
-	ftmlx.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
-	if (!errno && ftmlx.mlx)
+	errno = validate_and_init(argv[1],&game.map);
+	game.mlx.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
+	game.mlx.img = mlx_new_image(game.mlx.mlx, WIDTH, HEIGHT);
+	if (!errno && game.mlx.mlx && game.mlx.img)
 	{
-		errno = cast_thy_rays(&map, &ftmlx);
-		mlx_loop_hook(ftmlx.mlx, NULL, NULL);//add hook later
-		mlx_loop(ftmlx.mlx);
-	// ...loops_hooks and mlx stuff...
+		mlx_loop_hook(game.mlx.mlx, cast_thy_rays, &game);
+		mlx_loop(game.mlx.mlx);
 	}
-	dump_map(&map);
-	clean_all(&map,&ftmlx);
+	dump_map(&game.map);
+	clean_all(&game.map,&game.mlx);
 	return (errno);
 }

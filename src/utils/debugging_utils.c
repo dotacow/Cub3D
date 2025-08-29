@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 15:10:11 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/26 20:50:20 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:29:36 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	dump_map(t_map_elements *map)
 		map->ceiling);
 	fprintf(stderr, "Player pos: (%.2f, %.2f)\n", map->player.tail.x,
 		map->player.tail.y);
-	fprintf(stderr, "Player dir: magnitude=%.2f, theta= %f rad\n",
-		map->player.magnitude, (map->player.theta * 180 / M_PI));
+	fprintf(stderr, "Player dir: headx=%.2f,heady=%.2f, theta= %f rad\n",
+		map->player.head.x,map->player.head.y ,(map->player.theta * 180 / M_PI));
 	fprintf(stderr, "Map (%i rows x %i cols):\n", map->rows, map->cols);
 	i = 0;
 	while (i < (int)(map->rows))

@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/28 16:34:18 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:21:18 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_point
 /**
  * @brief magnitude AND direction (⌐■_■)
  * @param tail: the point from which the vector starts
- * @param magnitude: the length of the vector
+ * @param head: end of vector
  * @param theta: angle measured counter-clockwise from the positive x-axis
  */
 typedef struct s_vector
@@ -112,7 +112,23 @@ typedef struct s_map_elements
 	t_vector		plane;
 }					t_map_elements;
 
+typedef struct s_ray
+{
+	t_point			dir;
+	t_point			delta;
+	t_point			side_dist;
+	t_point			map;
+	t_point			step;
+	double			perp_dist;
+	int				hit;
+	int				side;
+}					t_ray;
 
+typedef struct s_game
+{
+	t_map_elements	map;
+	t_ftmlx			mlx;
+}	t_game;
 
 /*########## PARSING FUNCTIONS ##########*/
 int					validate_args(int ac, char **av);
@@ -186,7 +202,9 @@ float				get_mag(t_vector *v);
 float				deg_to_rad(float degrees);
 t_point				get_head(t_vector *v, float mag);
 /*######## RAYCASTING FUNCTIONS ########*/
-int					cast_thy_rays(t_map_elements *map,t_ftmlx *mlx);
+void				cast_thy_rays(void *game);
+/*######## HOOK FUNCTIONS ########*/
+void				hook_redirect(void *game);
 /*########### CLEANUP FUNCTIONS ##########*/
 void				clean_map(t_map_elements *map);
 void				clean_mlx(t_ftmlx *ftmlx);
