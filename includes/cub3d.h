@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/29 17:21:18 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:45:49 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_ray
 {
 	t_point			dir;
 	t_point			delta;
+	t_point			pos;
 	t_point			side_dist;
 	t_point			map;
 	t_point			step;
@@ -123,6 +124,8 @@ typedef struct s_ray
 	int				hit;
 	int				side;
 }					t_ray;
+
+
 
 typedef struct s_game
 {
@@ -203,6 +206,8 @@ float				deg_to_rad(float degrees);
 t_point				get_head(t_vector *v, float mag);
 /*######## RAYCASTING FUNCTIONS ########*/
 void				cast_thy_rays(void *game);
+void				map_ray(t_game *game,t_ray ray, int x);
+t_ray				get_ray_ent(t_game *game, int x);
 /*######## HOOK FUNCTIONS ########*/
 void				hook_redirect(void *game);
 /*########### CLEANUP FUNCTIONS ##########*/
