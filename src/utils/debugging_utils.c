@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 15:10:11 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 17:27:19 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 13:43:19 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,17 @@ void	dump_map(t_map_elements *map)
 		ft_putendl_fd("Map is NULL", 2);
 		return ;
 	}
-	fprintf(stderr, "floor: 0x%.6X, ceiling: 0x%.6X\n", map->floor,
+	printf( "floor: 0x%.6X, ceiling: 0x%.6X\n", map->floor,
 		map->ceiling);
-	fprintf(stderr, "Player pos: (%.2f, %.2f)\n", map->player.tail.x,
-		map->player.tail.y);
-	fprintf(stderr, "Player dir: magnitude=%.2f, theta= %f rad\n",
-		map->player.magnitude, (map->player.theta * 180 / M_PI));
-	fprintf(stderr, "Map (%i rows x %i cols):\n", map->rows, map->cols);
+	printf("Player and plane: pos(%.2f, %.2f), dir(%.2f, %.2f), plane(%.2f, %.2f)\n",
+		map->player.pos.x, map->player.pos.y, map->player.dir.x,
+		map->player.dir.y, map->player.plane.x, map->player.plane.y);
+	printf( "Map (%i rows x %i cols):\n", map->rows, map->cols);
 	i = 0;
-	while (i < (int)(map->rows * map->cols))
+	while (i < (int)(map->rows))
 	{
-		if (i && !(i % (int)map->cols))
-			ft_putchar_fd('\n', 2);
-		ft_putchar_fd(map->map[i], 2);
+		write(2, map->map + (i * (map->cols) ), map->cols);
+		write(2, "\n", 1);
 		i++;
 	}
 	ft_putchar_fd('\n', 2);

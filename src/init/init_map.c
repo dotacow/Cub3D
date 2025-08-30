@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 21:06:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/23 18:28:34 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 13:27:44 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	bzero_map(t_map_elements *map)
 	map->east = NULL;
 	map->cols = 0;
 	map->rows = 0;
-	bzero_vector(&map->player);
-	bzero_vector(&map->plane);
+	bzero_point(&map->player.dir);
+	bzero_point(&map->player.pos);
+	bzero_point(&map->player.plane);
 }
 
 /**

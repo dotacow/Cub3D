@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_helpers.c                                   :+:      :+:    :+:   */
+/*   clean_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 21:13:51 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 13:18:47 by yokitane         ###   ########.fr       */
+/*   Created: 2025/08/27 19:36:22 by yokitane          #+#    #+#             */
+/*   Updated: 2025/08/29 19:34:08 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	bzero_point(t_point *p)
+void	clean_mlx(t_ftmlx *ftmlx)
 {
-	if (!p)
-		return ;
-	p->x = 0.0f;
-	p->y = 0.0f;
+	if (ftmlx)
+	{
+		if (ftmlx->mlx)
+		{
+			mlx_terminate(ftmlx->mlx);
+			ftmlx->mlx = NULL;
+		}
+	}
+	ftmlx = NULL;
+}
+
+void	clean_all(t_map_elements *map, t_ftmlx *ftmlx)
+{
+	clean_map(map);
+	clean_mlx(ftmlx);
+	exit(errno);
 }

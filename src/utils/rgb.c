@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_helpers.c                                   :+:      :+:    :+:   */
+/*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/27 21:13:51 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 13:18:47 by yokitane         ###   ########.fr       */
+/*   Created: 2025/08/30 15:12:30 by yokitane          #+#    #+#             */
+/*   Updated: 2025/08/30 15:12:40 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+# include "../../includes/cub3d.h"
 
-void	bzero_point(t_point *p)
+int	get_rgba(int r, int g, int b, int a)
 {
-	if (!p)
-		return ;
-	p->x = 0.0f;
-	p->y = 0.0f;
+	return (r << 24 | g << 16 | b << 8 | a);
 }
