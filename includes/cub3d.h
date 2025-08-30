@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/29 17:45:49 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 13:03:00 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@
 # define WIDTH 840
 # define HEIGHT 640
 # define FOV 0.66f
-
+# define MS 0.05f
+# define TURNRATE 0.05f
+# define RIGHT 1.0f
+# define LEFT -1.0f
 /**
  * @brief enums for the frequency array used to help map validation
  *
@@ -210,6 +213,10 @@ void				map_ray(t_game *game,t_ray ray, int x);
 t_ray				get_ray_ent(t_game *game, int x);
 /*######## HOOK FUNCTIONS ########*/
 void				hook_redirect(void *game);
+void				move_fwd(t_game *game);
+void				move_bwd(t_game *game);
+void				move_l(t_game *game);
+void				move_r(t_game *game);
 /*########### CLEANUP FUNCTIONS ##########*/
 void				clean_map(t_map_elements *map);
 void				clean_mlx(t_ftmlx *ftmlx);
