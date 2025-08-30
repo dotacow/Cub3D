@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:19:43 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 13:25:31 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:57:36 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static int	parse_map_line(char *line, t_map_elements *map, int y)
 	x = 0;
 	while (line[x])
 	{
-		if (line[x] == 'N' || line[x] == 'S' || line[x] == 'W' || line[x] == 'E')
+		if (line[x] == 'N' || line[x] == 'S'
+				||line[x] == 'W' || line[x] == 'E')
 		{
 			map->player.pos.x = x + 0.5f;
 			map->player.pos.y = y + 0.5f;

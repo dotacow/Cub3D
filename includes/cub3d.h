@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 15:37:30 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:56:55 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define WIDTH 840
 # define HEIGHT 640
 # define FOV 0.66f
-# define MS 0.05f
-# define TURNRATE 0.05f
+# define MS 0.03f
+# define TURNRATE 0.025f
 # define RIGHT 1.0f
 # define LEFT -1.0f
 # define FRWRD 1.0f

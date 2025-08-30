@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:56:38 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 15:06:09 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:58:08 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ static void	cast_ray(char *grid, t_ray *ray, int cols)
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
-		ray->perp_dist = (ray->map.x - ray->pos.x + (1 - ray->step.x) / 2.0f) / ray->dir.x;
+		ray->perp_dist = (ray->map.x - ray->pos.x +
+				(1 - ray->step.x) / 2.0f) / ray->dir.x;
 	else
-		ray->perp_dist = (ray->map.y - ray->pos.y + (1 - ray->step.y) / 2.0f) / ray->dir.y;
+		ray->perp_dist = (ray->map.y - ray->pos.y +
+				(1 - ray->step.y) / 2.0f) / ray->dir.y;
 }
 
 static void render(t_game *game)

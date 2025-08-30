@@ -6,13 +6,13 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:21:47 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 15:37:49 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:00:00 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void put_rgb(t_game *game, int x, int draw_start, int draw_end)
+static void	put_rgb(t_game *game, int x, int draw_start, int draw_end)
 {
 	int	y;
 
@@ -30,15 +30,15 @@ static void put_rgb(t_game *game, int x, int draw_start, int draw_end)
 	}
 }
 
-
-static void	calculate_wall_params(void *params[2], t_ray ray, int arr[2], float farr[2])
+static void	calculate_wall_params(void *p[2], t_ray ray, int arr[2],
+			float farr[2])
 {
 	t_game			*game;
 	mlx_texture_t	*tex;
 	float			wall_height;
 
-	game = (t_game *)params[0];
-	tex = (mlx_texture_t *)params[1];
+	game = (t_game *)p[0];
+	tex = (mlx_texture_t *)p[1];
 	wall_height = (float)game->mlx.img->height / ray.perp_dist;
 	farr[1] = (float)tex->height / wall_height;
 	arr[0] = (int)(-wall_height / 2.0f + game->mlx.img->height / 2.0f);
@@ -57,11 +57,8 @@ static void	draw_wall(t_game *game, int screen_x, mlx_texture_t *tex, t_ray ray)
 	float	farr[2];
 	int		idx;
 	int		tex_y;
-	void	*params[2];
 
-	params[0] = game;
-	params[1] = tex;
-	calculate_wall_params(params, ray, arr, farr);
+	calculate_wall_params((void *[]){game, tex}, ray, arr, farr);
 	while (arr[0] <= arr[1])
 	{
 		tex_y = (int)farr[0];
@@ -103,11 +100,11 @@ void	map_ray(t_game *game, t_ray ray, int x)
 	int				draw_start;
 
 	if (ray.side == 0)
-		ray.perp_dist = (ray.map.x - game->map.player.pos.x + (1 - ray.step.x) / 2)
-			/ ray.dir.x;
+		ray.perp_dist = (ray.map.x - game->map.player.pos.x
+			+ (1 - ray.step.x) / 2) / ray.dir.x;
 	else
-		ray.perp_dist = (ray.map.y - game->map.player.pos.y + (1 - ray.step.y) / 2)
-			/ ray.dir.y;
+		ray.perp_dist = (ray.map.y - game->map.player.pos.y
+			+ (1 - ray.step.y) / 2) / ray.dir.y;
 	line_height = (float)game->mlx.img->height / ray.perp_dist;
 	draw_start = get_draw_start(line_height, game->mlx.img->height);
 	draw_end = get_draw_end(line_height, game->mlx.img->height);
