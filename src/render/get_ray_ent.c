@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 17:34:01 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 14:43:19 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:05:35 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ t_ray	get_ray_ent(t_game *game, int x)
 		ray.delta.y = 1e30;
 	else
 		ray.delta.y = fabsf(1.0f / ray.dir.y);
-	set_step(&ray);
 	ray.hit = 0;
 	ray.side = -1;
 	ray.perp_dist = 0.0;
 	ray.pos = game->map.player.pos;
+	set_step(&ray);
 	return (ray);
 }
 

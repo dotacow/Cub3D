@@ -6,11 +6,23 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:56:38 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 14:42:18 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:06:09 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+// static void bzero_ray(t_ray *ray)
+// {
+// 	ray->dir = (t_point){0.0f, 0.0f};
+// 	ray->map = (t_point){0, 0};
+// 	ray->step = (t_point){0, 0};
+// 	ray->delta = (t_point){0.0f, 0.0f};
+// 	ray->side_dist = (t_point){0.0f, 0.0f};
+// 	ray->side = -1;
+// 	ray->hit = 0;
+// 	ray->perp_dist = 0.0f;
+// }
 
 static void	cast_ray(char *grid, t_ray *ray, int cols)
 {
