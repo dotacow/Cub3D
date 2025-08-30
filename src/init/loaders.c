@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 21:32:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/22 19:06:02 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:10:51 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	load_texture(t_map_elements *map, char *key, char *val)
 static int	load_color(t_map_elements *map, char *key, char *val)
 {
 	char			**rgb;
-	unsigned int	color;
+	int	color;
 
 	color = 0;
 	rgb = ft_split(val, ',');
@@ -53,7 +53,8 @@ static int	load_color(t_map_elements *map, char *key, char *val)
 		free_split(rgb);
 		return (ENOMEM);
 	}
-	color = (ft_atoi(rgb[0]) << 16) | (ft_atoi(rgb[1]) << 8) | ft_atoi(rgb[2]);
+	color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
+			ft_atoi(rgb[2]), 255);
 	if (key[0] == 'F')
 		map->floor = color;
 	else
