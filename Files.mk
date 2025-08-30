@@ -8,11 +8,11 @@ PARSING = parsing/found_utils.c parsing/validate_textures.c \
 		parsing/flood_fill.c parsing/map_validation.c parsing/utils.c \
 		parsing/validate_rgb.c
 
-UTILS =
+UTILS = utils/rgb.c
 
 DEBUG = utils/debugging_utils.c
 
-RENDER = render/cast_rays.c render/hooks.c render/mapping.c render/get_ray_ent.c
+RENDER = render/cast_rays.c render/hooks.c render/mapping.c render/get_ray_ent.c render/mapping_utils.c
 
 VECTORS = vectors/vector_helpers.c
 

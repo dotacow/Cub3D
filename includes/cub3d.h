@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 15:09:01 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 15:37:30 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,11 @@ void				bzero_point(t_point *p);
 void				cast_thy_rays(void *game);
 void				map_ray(t_game *game,t_ray ray, int x);
 t_ray				get_ray_ent(t_game *game, int x);
+int					get_rgba(int r, int g, int b, int a);
+int					get_draw_end(float lh, int h);
+int					get_draw_start(float lh, int h);
+int					get_tex_x(t_game *game, t_ray ray,
+						mlx_texture_t *tex);
 /*######## HOOK FUNCTIONS ########*/
 void				hook_redirect(void *game);
 /*########### CLEANUP FUNCTIONS ##########*/
