@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:21:47 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 16:00:00 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:07:35 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ static void	draw_wall(t_game *game, int screen_x, mlx_texture_t *tex, t_ray ray)
 		if (tex_y >= (int)tex->height)
 			tex_y = (int)tex->height - 1;
 		idx = (tex_y * tex->width + get_tex_x(game, ray, tex)) * 4;
+		if (idx < 0 || idx >= (int)(tex->width * tex->height * 4))
+			break ;
 		mlx_put_pixel(game->mlx.img, screen_x, arr[0],
-			get_rgba(tex->pixels[idx + 0], tex->pixels[idx + 1],
+			get_rgba(tex->pixels[idx], tex->pixels[idx + 1],
 				tex->pixels[idx + 2], tex->pixels[idx + 3]));
 		farr[0] += farr[1];
 		arr[0]++;

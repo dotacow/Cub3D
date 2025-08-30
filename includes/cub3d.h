@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 15:56:55 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 20:05:19 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 # define NMAPELEMENTS 7
 # define FPI 3.14159265359f
-# define WIDTH 840
-# define HEIGHT 640
+# define WIDTH 84
+# define HEIGHT 64
 # define FOV 0.66f
 # define MS 0.03f
 # define TURNRATE 0.025f
