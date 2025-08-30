@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 18:19:43 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/29 15:57:30 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 13:25:31 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,28 @@ char	*skip_to_map(int fd)
 	return (line);
 }
 
-/**
- * @brief translates char of player in matrix to radian.
- * @note if the way I parse the matrix (reversed y signage) causes problems,
- * I can probably just mirror Y angles here.
- * @param c
- * @return float
- */
-static float	get_cardinal_direction(char c)
+static void	set_dir_plane(t_player *player, char c)
 {
 	if (c == 'N')
-		return (FPI / 2.0f);
+	{
+		player->dir = (t_point){0.0f, -1.0f};
+		player->plane = (t_point){0.66f, 0.0f};
+	}
 	else if (c == 'S')
-		return (FPI * 1.5f);
+	{
+		player->dir = (t_point){0.0f, 1.0f};
+		player->plane = (t_point){-0.66f, 0.0f};
+	}
 	else if (c == 'W')
-		return (FPI);
-	return (0.0f);
+	{
+		player->dir = (t_point){-1.0f, 0.0f};
+		player->plane = (t_point){0.0f, -0.66f};
+	}
+	else if (c == 'E')
+	{
+		player->dir = (t_point){1.0f, 0.0f};
+		player->plane = (t_point){0.0f, 0.66f};
+	}
 }
 
 static int	parse_map_line(char *line, t_map_elements *map, int y)
@@ -59,20 +65,14 @@ static int	parse_map_line(char *line, t_map_elements *map, int y)
 	x = 0;
 	while (line[x])
 	{
-		if (line[x] == 'N' || line[x] == 'S' || line[x] == 'E'
-			|| line[x] == 'W')
+		if (line[x] == 'N' || line[x] == 'S' || line[x] == 'W' || line[x] == 'E')
 		{
-			map->player.tail.x = x + 0.5f;
-			map->player.tail.y = y + 0.5f;
-			map->player.theta = get_cardinal_direction(line[x]);
-			map->player.head = get_head(&map->player, 1.0f);
+			map->player.pos.x = x + 0.5f;
+			map->player.pos.y = y + 0.5f;
+			set_dir_plane(&map->player, line[x]);
 		}
 		x++;
 	}
-	map->plane.tail.x = map->player.tail.x;
-	map->plane.tail.y = map->player.tail.y;
-	map->plane.theta = map->player.theta + (FPI / 2.0f);
-	map->plane.head = get_head(&map->plane, 0.66f);
 	return (x);
 }
 

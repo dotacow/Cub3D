@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 13:03:00 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 13:37:04 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define TURNRATE 0.05f
 # define RIGHT 1.0f
 # define LEFT -1.0f
+# define FRWRD 1.0f
+# define BKWRD -1.0f
 /**
  * @brief enums for the frequency array used to help map validation
  *
@@ -69,19 +71,13 @@ typedef struct s_point
 	float			y;
 }					t_point;
 
-/**
- * @brief magnitude AND direction (⌐■_■)
- * @param tail: the point from which the vector starts
- * @param head: end of vector
- * @param theta: angle measured counter-clockwise from the positive x-axis
- */
-typedef struct s_vector
-{
-	t_point			tail;
-	t_point			head;
-	float			theta;
-}					t_vector;
 
+typedef struct s_player
+{
+	t_point pos;
+	t_point dir;
+	t_point plane;
+}				t_player;
 /**
  * @brief: contains the successfully validated map elements
  * @param map: flat matrix representing the map, 1 for wall, everything else empty
@@ -111,8 +107,7 @@ typedef struct s_map_elements
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
 	mlx_texture_t	*east;
-	t_vector		player;
-	t_vector		plane;
+	t_player		player;
 }					t_map_elements;
 
 typedef struct s_ray
@@ -199,24 +194,13 @@ int					read_map(t_map_elements *map, int fd);
 int					get_map_ent(t_map_elements *map, int fd);
 /*########## LOADING FUNCTIONS ##########*/
 int					load_data(t_map_elements *map, char *line);
-/*########## MATH FUNCTIONS ##########*/
-void				rotate_vector(t_vector *v, float angle);
-void				veccpy(t_vector *dest, t_vector src);
-void				bzero_vector(t_vector *v);
 void				bzero_point(t_point *p);
-float				get_mag(t_vector *v);
-float				deg_to_rad(float degrees);
-t_point				get_head(t_vector *v, float mag);
 /*######## RAYCASTING FUNCTIONS ########*/
 void				cast_thy_rays(void *game);
 void				map_ray(t_game *game,t_ray ray, int x);
 t_ray				get_ray_ent(t_game *game, int x);
 /*######## HOOK FUNCTIONS ########*/
 void				hook_redirect(void *game);
-void				move_fwd(t_game *game);
-void				move_bwd(t_game *game);
-void				move_l(t_game *game);
-void				move_r(t_game *game);
 /*########### CLEANUP FUNCTIONS ##########*/
 void				clean_map(t_map_elements *map);
 void				clean_mlx(t_ftmlx *ftmlx);
