@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:56:38 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 12:43:33 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 14:42:18 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	cast_ray(char *grid, t_ray *ray, int cols)
 {
+	ray->hit = 0;
 	while (!ray->hit)
 	{
 		if (ray->side_dist.x < ray->side_dist.y)
@@ -43,7 +44,7 @@ static void render(t_game *game)
 	t_ray	ray;
 
 	x = 0;
-	while (x < WIDTH)
+	while (x < (int)game->mlx.img->width)
 	{
 		ray = get_ray_ent(game, x);
 		cast_ray(game->map.map, &ray, game->map.cols);

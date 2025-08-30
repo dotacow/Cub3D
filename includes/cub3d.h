@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 13:37:04 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 14:16:12 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ typedef struct s_ray
 	int				hit;
 	int				side;
 }					t_ray;
-
-
 
 typedef struct s_game
 {

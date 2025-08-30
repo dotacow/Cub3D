@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 17:34:01 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/29 17:53:26 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/08/30 14:43:19 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,30 +39,27 @@ static void	set_step(t_ray *ray)
 
 t_ray	get_ray_ent(t_game *game, int x)
 {
-	t_ray	prime;
+	t_ray	ray;
 	float	cam_x;
 
-	cam_x = 2.0f * (float)x / (float)WIDTH - 1.0f;
-	prime.pos.x = game->map.player.tail.x;
-	prime.pos.y = game->map.player.tail.y;
-	prime.map.x = (int)prime.pos.x;
-	prime.map.y = (int)prime.pos.y;
-	prime.dir.x = (game->map.player.head.x - game->map.player.tail.x) +
-		cam_x * game->map.plane.head.x;
-	prime.dir.y = (game->map.player.head.y - game->map.player.tail.y) +
-		cam_x * game->map.plane.head.y;
-	if (prime.dir.x == 0)
-		prime.delta.x = (float)INFINITY;
+	cam_x = 2.0f * (float)x / (float)game->mlx.img->width - 1.0f;
+	ray.dir.x = game->map.player.dir.x + game->map.player.plane.x * cam_x;
+	ray.dir.y = game->map.player.dir.y + game->map.player.plane.y * cam_x;
+	ray.map.x = (int)game->map.player.pos.x;
+	ray.map.y = (int)game->map.player.pos.y;
+	if (ray.dir.x == 0)
+		ray.delta.x = 1e30;
 	else
-		prime.delta.x = fabsf(1.0f / prime.dir.x);
-	if (prime.dir.y == 0)
-		prime.delta.y = (float)INFINITY;
+		ray.delta.x = fabsf(1.0f / ray.dir.x);
+	if (ray.dir.y == 0)
+		ray.delta.y = 1e30;
 	else
-		prime.delta.y = fabsf(1.0f / prime.dir.y);
-	set_step(&prime);
-	prime.hit = 0;
-	prime.side = -1;
-	prime.perp_dist = 0.0f;
-	return (prime);
+		ray.delta.y = fabsf(1.0f / ray.dir.y);
+	set_step(&ray);
+	ray.hit = 0;
+	ray.side = -1;
+	ray.perp_dist = 0.0;
+	ray.pos = game->map.player.pos;
+	return (ray);
 }
 

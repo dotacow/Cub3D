@@ -12,7 +12,7 @@ UTILS =
 
 DEBUG = utils/debugging_utils.c
 
-RENDER = render/cast_rays.c render/hooks.c render/mapping.c render/get_ray_ent.c render/movement.c
+RENDER = render/cast_rays.c render/hooks.c render/mapping.c render/get_ray_ent.c
 
 VECTORS = vectors/vector_helpers.c
 
