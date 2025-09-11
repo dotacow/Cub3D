@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void	set_step(t_ray *ray)
 {
@@ -35,7 +35,6 @@ static void	set_step(t_ray *ray)
 		ray->side_dist.y = (ray->map.y + 1.0 - ray->pos.y) * ray->delta.y;
 	}
 }
-
 
 t_ray	get_ray_ent(t_game *game, int x)
 {
@@ -62,4 +61,3 @@ t_ray	get_ray_ent(t_game *game, int x)
 	set_step(&ray);
 	return (ray);
 }
-

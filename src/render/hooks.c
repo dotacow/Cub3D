@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 static void	move(t_game *game, float speed)
 {
-	t_player p;
-	float new_x;
-	float new_y;
+	t_player	p;
+	float		new_x;
+	float		new_y;
 
 	p = game->map.player;
 	new_x = p.pos.x + p.dir.x * speed;
@@ -27,12 +27,11 @@ static void	move(t_game *game, float speed)
 		game->map.player.pos.x = new_x;
 }
 
-
 static void	strafe(t_game *game, float speed)
 {
-	t_player p;
-	float new_x;
-	float new_y;
+	t_player	p;
+	float		new_x;
+	float		new_y;
 
 	p = game->map.player;
 	new_x = p.pos.x + p.plane.x * speed;
@@ -51,8 +50,8 @@ static void	turn(t_game *game, float dir)
 	old_dir_x = game->map.player.dir.x;
 	game->map.player.dir.x = game->map.player.dir.x * cosf(dir)
 		- game->map.player.dir.y * sinf(dir);
-	game->map.player.dir.y = old_dir_x * sinf(dir)
-		+ game->map.player.dir.y * cosf(dir);
+	game->map.player.dir.y = old_dir_x * sinf(dir) + game->map.player.dir.y
+		* cosf(dir);
 	old_plane_x = game->map.player.plane.x;
 	game->map.player.plane.x = game->map.player.plane.x * cosf(dir)
 		- game->map.player.plane.y * sinf(dir);
@@ -65,13 +64,13 @@ void	hook_redirect(void *game)
 	if (mlx_is_key_down(((t_game *)game)->mlx.mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(((t_game *)game)->mlx.mlx);
 	if (mlx_is_key_down(((t_game *)game)->mlx.mlx, MLX_KEY_W))
-		move((t_game *)game,(FRWRD * MS));
+		move((t_game *)game, (FRWRD * MS));
 	if (mlx_is_key_down(((t_game *)game)->mlx.mlx, MLX_KEY_S))
-		move((t_game *)game,(BKWRD * MS));
+		move((t_game *)game, (BKWRD * MS));
 	if (mlx_is_key_down(((t_game *)game)->mlx.mlx, MLX_KEY_A))
-		strafe((t_game *)game,(LEFT * MS));
+		strafe((t_game *)game, (LEFT * MS));
 	if (mlx_is_key_down(((t_game *)game)->mlx.mlx, MLX_KEY_D))
-		strafe((t_game *)game,(RIGHT * MS));
+		strafe((t_game *)game, (RIGHT * MS));
 	if (mlx_is_key_down(((t_game *)game)->mlx.mlx, MLX_KEY_LEFT))
 		turn((t_game *)game, (LEFT * TURNRATE));
 	if (mlx_is_key_down(((t_game *)game)->mlx.mlx, MLX_KEY_RIGHT))

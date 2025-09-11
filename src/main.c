@@ -6,12 +6,11 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/09/11 13:07:21 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 13:29:40 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <errno.h>
 
 int	validate_and_init(char *path, t_map_elements *map)
 {
@@ -51,7 +50,7 @@ int	main(int argc, char **argv)
 	errno = 0;
 	if (!validate_args(argc, argv))
 		return (1);
-	errno = validate_and_init(argv[1],&game.map);
+	errno = validate_and_init(argv[1], &game.map);
 	if (errno)
 	{
 		clean_map(&game.map);
@@ -66,6 +65,6 @@ int	main(int argc, char **argv)
 		mlx_loop_hook(game.mlx.mlx, cast_thy_rays, &game);
 		mlx_loop(game.mlx.mlx);
 	}
-	clean_all(&game.map,&game.mlx);
+	clean_all(&game.map, &game.mlx);
 	return (errno);
 }

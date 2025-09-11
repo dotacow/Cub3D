@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:03:06 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/09/11 11:06:43 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 15:01:03 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,27 @@ static int	check_map_interior(char **temp_map, int rows, int cols, int *valid)
 	int		i;
 	int		j;
 
-	i = 0;
-	while (i < rows - 1 && *valid)
-	{
-		j = 0;
-		while (j < cols && *valid)
-		{
-			c = temp_map[i][j];
-			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-			{
-				if (temp_map[i + 1][j] == '\0' || temp_map[i + 1][j] == ' ')
-					*valid = 0;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (*valid);
+       i = -1;
+       while (++i < rows && *valid)
+       {
+	       j = -1;
+	       while (++j < cols && *valid)
+	       {
+		       c = temp_map[i][j];
+		       if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		       {
+			       if (i == 0 || temp_map[i - 1][j] == '\0' || temp_map[i - 1][j] == ' ')
+				       *valid = 0;
+			       if (i == rows - 1 || temp_map[i + 1][j] == '\0' || temp_map[i + 1][j] == ' ')
+				       *valid = 0;
+			       if (j == 0 || temp_map[i][j - 1] == '\0' || temp_map[i][j - 1] == ' ')
+				       *valid = 0;
+			       if (j == cols - 1 || temp_map[i][j + 1] == '\0' || temp_map[i][j + 1] == ' ')
+				       *valid = 0;
+		       }
+	       }
+       }
+       return (*valid);
 }
 
 static int	validate_map_temp(char **map_copy, int rows, int cols,

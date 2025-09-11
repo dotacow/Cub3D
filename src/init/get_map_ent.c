@@ -65,8 +65,8 @@ static int	parse_map_line(char *line, t_map_elements *map, int y)
 	x = 0;
 	while (line[x])
 	{
-		if (line[x] == 'N' || line[x] == 'S'
-				||line[x] == 'W' || line[x] == 'E')
+		if (line[x] == 'N' || line[x] == 'S' || line[x] == 'W'
+			|| line[x] == 'E')
 		{
 			map->player.pos.x = x + 0.5f;
 			map->player.pos.y = y + 0.5f;

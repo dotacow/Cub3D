@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/09/11 13:12:45 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 13:32:09 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ typedef enum e_elements
  */
 typedef struct s_ftmlx
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-}	t_ftmlx;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+}					t_ftmlx;
 
 /**
  * @brief a cartesian point in 2D space
@@ -71,33 +71,34 @@ typedef struct s_point
 	float			y;
 }					t_point;
 
-
 typedef struct s_player
 {
-	t_point pos;
-	t_point dir;
-	t_point plane;
-}				t_player;
+	t_point			pos;
+	t_point			dir;
+	t_point			plane;
+}					t_player;
 
-typedef struct s_flood_ctx {
-	char **map;
-	int rows;
-	int cols;
-	int player_row;
-	int player_col;
-}				t_flood_ctx;
+typedef struct s_flood_ctx
+{
+	char			**map;
+	int				rows;
+	int				cols;
+	int				player_row;
+	int				player_col;
+}					t_flood_ctx;
 
-
-typedef struct s_map_read_ctx {
-    int fd;
-    char *first_line;
-    int rows;
-    int cols;
-} t_map_read_ctx;
+typedef struct s_map_read_ctx
+{
+	int				fd;
+	char			*first_line;
+	int				rows;
+	int				cols;
+}					t_map_read_ctx;
 
 /**
  * @brief: contains the successfully validated map elements
- * @param map: flat matrix representing the map, 1 for wall, everything else empty
+ * @param map: flat matrix representing the map, 1 for wall,
+	everything else empty
  * @param line: the first line of the map, used while loading map.
  * @param north: north wall texture
  * @param south: south wall texture
@@ -110,7 +111,6 @@ typedef struct s_map_read_ctx {
  * @param rows: number of rows in the map (after padding,
 	uniform across columns.)
  * @param player: the player's position in the map
- * @param plane: the player's viewing plane (perpendicular to the direction of view)
  */
 typedef struct s_map_elements
 {
@@ -144,7 +144,7 @@ typedef struct s_game
 {
 	t_map_elements	map;
 	t_ftmlx			mlx;
-}	t_game;
+}					t_game;
 
 /*########## PARSING FUNCTIONS ##########*/
 int					validate_args(int ac, char **av);
@@ -152,13 +152,14 @@ int					is_valid_map(int fd);
 // map parser functions
 int					validate_line(char *str, t_elements *found);
 int					is_map_content(char *line);
-int					setup_map_data(t_map_read_ctx *ctx, char ***lines, char ***map_copy);
+int					setup_map_data(t_map_read_ctx *ctx, char ***lines,
+						char ***map_copy);
 int					validate_map_content(char *line, t_elements *found, int fd);
 // map reader functions
 int					process_line_length(char *line, int *max_cols);
 void				init_lines_array(char **lines, int max_lines);
-char				**read_remaining_lines(t_map_read_ctx *ctx, char **lines, int *count,
-						int max_lines);
+char				**read_remaining_lines(t_map_read_ctx *ctx, char **lines,
+						int *count, int max_lines);
 char				**read_all_map_lines(t_map_read_ctx *ctx);
 int					process_map_validation(char **lines, char **map_copy,
 						int rows, int cols);
@@ -210,19 +211,18 @@ int					load_data(t_map_elements *map, char *line);
 void				bzero_point(t_point *p);
 /*######## RAYCASTING FUNCTIONS ########*/
 void				cast_thy_rays(void *game);
-void				map_ray(t_game *game,t_ray ray, int x);
+void				map_ray(t_game *game, t_ray ray, int x);
 t_ray				get_ray_ent(t_game *game, int x);
 int					get_rgba(int r, int g, int b, int a);
 int					get_draw_end(float lh, int h);
 int					get_draw_start(float lh, int h);
-int					get_tex_x(t_game *game, t_ray ray,
-						mlx_texture_t *tex);
+int					get_tex_x(t_game *game, t_ray ray, mlx_texture_t *tex);
 /*######## HOOK FUNCTIONS ########*/
 void				hook_redirect(void *game);
 /*########### CLEANUP FUNCTIONS ##########*/
 void				clean_map(t_map_elements *map);
 void				clean_mlx(t_ftmlx *ftmlx);
-void				clean_all(t_map_elements *map,t_ftmlx *ftmlx);
+void				clean_all(t_map_elements *map, t_ftmlx *ftmlx);
 /*######### DEBUGGING FUNCTIONS ##########*/
 void				dump_map(t_map_elements *map);
 #endif
