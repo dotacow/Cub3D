@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/24 17:26:21 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/11 13:02:03 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
  */
 int	validate_line(char *str, t_elements *found)
 {
-	char		**keyval;
-	int			idx;
-	int			ret;
-	static int	(*validators[])(char *, t_elements *) = {validate_no,
+	char	**keyval;
+	int		idx;
+	int		ret;
+	static int (*validators[])(char *, t_elements *) = {validate_no,
 		validate_so, validate_we, validate_ea, validate_floor, validate_ceil};
-
+		
 	if (!*str)
 		return (1);
 	keyval = ft_split(str, ' ');
@@ -101,9 +101,7 @@ int	is_valid_map(int fd)
 		line = get_next_line(fd);
 	}
 	if (valid && line)
-	{
 		valid = validate_map_content(line, found, fd);
-	}
 	else
 		valid = 0;
 	if (line)
@@ -114,24 +112,20 @@ int	is_valid_map(int fd)
 
 /**
  * @brief setup map data by reading lines and creating 2D copy
- * @param line first line of map content
- * @param fd file descriptor
+ * @param ctx context containing file descriptor and first line of map content
  * @param lines pointer to store array of lines
  * @param map_copy pointer to store 2D map copy
- * @param rows pointer to store number of rows
- * @param cols pointer to store number of columns
  * @return 1 on success, 0 on failure
  */
-int	setup_map_data(char *line, int fd, char ***lines, char ***map_copy,
-		int *rows, int *cols)
+int	setup_map_data(t_map_read_ctx *ctx, char ***lines, char ***map_copy)
 {
-	*lines = read_all_map_lines(fd, line, rows, cols);
+	*lines = read_all_map_lines(ctx);
 	if (!*lines)
 		return (0);
-	*map_copy = create_2d_map_copy(*lines, *rows, *cols);
+	*map_copy = create_2d_map_copy(*lines, ctx->rows, ctx->cols);
 	if (!*map_copy)
 	{
-		free_lines(*lines, *rows);
+		free_lines(*lines, ctx->rows);
 		return (0);
 	}
 	return (1);
@@ -149,17 +143,24 @@ int	setup_map_data(char *line, int fd, char ***lines, char ***map_copy,
  */
 int	validate_map_content(char *line, t_elements *found, int fd)
 {
-	char	**lines;
-	char	**map_copy;
-	int		rows;
-	int		cols;
-	int		valid;
+	t_map_read_ctx	ctx;
+	char			**lines;
+	char			**map_copy;
+	int				valid;
 
 	if (!line || !*line)
 		return (0);
-	if (!setup_map_data(line, fd, &lines, &map_copy, &rows, &cols))
+	ctx.fd = fd;
+	ctx.first_line = line;
+	if (!setup_map_data(&ctx, &lines, &map_copy))
 		return (0);
-	valid = process_map_validation(lines, map_copy, rows, cols);
+	if (has_invalid_map_char(lines))
+	{
+		free_lines(lines, ctx.rows);
+		free_map_copy(map_copy, ctx.rows);
+		return (0);
+	}
+	valid = process_map_validation(lines, map_copy, ctx.rows, ctx.cols);
 	if (valid)
 		found[MAP] = 1;
 	return (valid);

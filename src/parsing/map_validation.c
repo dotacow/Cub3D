@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:03:06 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/23 17:14:36 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 11:06:43 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,59 @@
  * @param cols number of columns
  * @return int 1 if valid (enclosed), 0 if invalid (not enclosed)
  */
-int	validate_map_enclosure(char **map_copy, int rows, int cols)
+static int	check_map_interior(char **temp_map, int rows, int cols, int *valid)
 {
-	int		player_row;
-	int		player_col;
+	char	c;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < rows - 1 && *valid)
+	{
+		j = 0;
+		while (j < cols && *valid)
+		{
+			c = temp_map[i][j];
+			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			{
+				if (temp_map[i + 1][j] == '\0' || temp_map[i + 1][j] == ' ')
+					*valid = 0;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (*valid);
+}
+
+static int	validate_map_temp(char **map_copy, int rows, int cols,
+		t_flood_ctx *ctx)
+{
 	char	**temp_map;
 	int		valid;
 
-	player_row = -1;
-	player_col = -1;
-	if (!find_player_position(map_copy, rows, cols, &player_row, &player_col))
-		return (0);
 	temp_map = create_temp_map(map_copy, rows, cols);
 	if (!temp_map)
 		return (0);
-	flood_fill(temp_map, player_row, player_col, rows, cols);
+	ctx->map = temp_map;
+	flood_fill(ctx, ctx->player_row, ctx->player_col);
 	valid = check_boundary_breach(temp_map, rows, cols);
+	if (valid)
+		check_map_interior(temp_map, rows, cols, &valid);
 	free_temp_map(temp_map, rows);
 	return (valid);
+}
+
+int	validate_map_enclosure(char **map_copy, int rows, int cols)
+{
+	t_flood_ctx	ctx;
+
+	ctx.map = map_copy;
+	ctx.rows = rows;
+	ctx.cols = cols;
+	if (!find_player_position(&ctx))
+		return (0);
+	return (validate_map_temp(map_copy, rows, cols, &ctx));
 }
 
 /**
