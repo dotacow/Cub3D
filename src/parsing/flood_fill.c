@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
+/*   By: hamzabillah <hamzabillah@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:03:06 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/23 17:15:57 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/04 11:57:12 by hamzabillah      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@
  * @return int 1 if flood fill reaches boundary (invalid),
 	0 if contained (valid)
  */
-void	flood_fill(char **map, int row, int col, int total_rows, int total_cols)
+void	flood_fill(t_flood_ctx *ctx, int row, int col)
 {
 	char	cell;
 
-	if (row < 0 || row >= total_rows || col < 0 || col >= total_cols)
+	if (row < 0 || row >= ctx->rows || col < 0 || col >= ctx->cols)
 		return ;
-	cell = map[row][col];
+	cell = ctx->map[row][col];
 	if (cell == '1' || cell == 'F')
 		return ;
 	if (cell == '0' || cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W'
 		|| cell == ' ')
 	{
-		map[row][col] = 'F';
-		flood_fill(map, row - 1, col, total_rows, total_cols);
-		flood_fill(map, row + 1, col, total_rows, total_cols);
-		flood_fill(map, row, col - 1, total_rows, total_cols);
-		flood_fill(map, row, col + 1, total_rows, total_cols);
+		ctx->map[row][col] = 'F';
+		flood_fill(ctx, row - 1, col);
+		flood_fill(ctx, row + 1, col);
+		flood_fill(ctx, row, col - 1);
+		flood_fill(ctx, row, col + 1);
 	}
 }
 
@@ -51,31 +51,31 @@ void	flood_fill(char **map, int row, int col, int total_rows, int total_cols)
  * @param player_col pointer to store player column
  * @return 1 if exactly one player found, 0 otherwise
  */
-int	find_player_position(char **map, int rows, int cols, int *player_row,
-		int *player_col)
+int	find_player_position(t_flood_ctx *ctx)
 {
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < rows)
+	i = -1;
+	ctx->player_row = -1;
+	ctx->player_col = -1;
+	while (++i < ctx->rows)
 	{
 		j = 0;
-		while (j < cols)
+		while (j < ctx->cols)
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
+			if (ctx->map[i][j] == 'N' || ctx->map[i][j] == 'S'
+				|| ctx->map[i][j] == 'E' || ctx->map[i][j] == 'W')
 			{
-				if (*player_row != -1)
+				if (ctx->player_row != -1)
 					return (0);
-				*player_row = i;
-				*player_col = j;
+				ctx->player_row = i;
+				ctx->player_col = j;
 			}
 			j++;
 		}
-		i++;
 	}
-	if (*player_row == -1)
+	if (ctx->player_row == -1)
 		return (0);
 	return (1);
 }
@@ -114,8 +114,8 @@ char	**create_temp_map(char **map_copy, int rows, int cols)
 	temp_map = (char **)malloc(sizeof(char *) * rows);
 	if (!temp_map)
 		return (NULL);
-	k = 0;
-	while (k < rows)
+	k = -1;
+	while (++k < rows)
 	{
 		temp_map[k] = (char *)malloc(sizeof(char) * (cols + 1));
 		if (!temp_map[k])
@@ -130,7 +130,6 @@ char	**create_temp_map(char **map_copy, int rows, int cols)
 			return (NULL);
 		}
 		ft_strlcpy(temp_map[k], map_copy[k], cols + 1);
-		k++;
 	}
 	return (temp_map);
 }

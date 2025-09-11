@@ -6,11 +6,12 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/09/11 12:11:05 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/11 15:02:27 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include <errno.h>
 
 int	validate_and_init(char *path, t_map_elements *map)
 {
@@ -51,6 +52,11 @@ int	main(int argc, char **argv)
 	if (!validate_args(argc, argv))
 		return (1);
 	errno = validate_and_init(argv[1],&game.map);
+	if (errno)
+	{
+		clean_map(&game.map);
+		return (errno);
+	}
 	dump_map(&game.map);
 	if(errno)
 	{

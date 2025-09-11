@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_reader.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.amman>         +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:03:06 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/08/23 17:14:34 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/10 17:18:24 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,40 +49,37 @@ void	init_lines_array(char **lines, int max_lines)
 
 /**
  * @brief read remaining lines from file descriptor
- * @param fd file descriptor
+ * @param ctx context containing file descriptor and first line
  * @param lines array to store lines
  * @param count pointer to line counter
  * @param max_lines maximum number of lines
- * @param max_cols pointer to maximum columns counter
  * @return lines array
  */
-char	**read_remaining_lines(int fd, char **lines, int *count, int max_lines,
-		int *max_cols)
+char	**read_remaining_lines(t_map_read_ctx *ctx, char **lines, int *count,
+		int max_lines)
 {
 	char	*current_line;
 
-	current_line = get_next_line(fd);
+	current_line = get_next_line(ctx->fd);
 	while (current_line && *count < max_lines)
 	{
 		lines[*count] = current_line;
-		process_line_length(lines[*count], max_cols);
+		process_line_length(lines[*count], &ctx->cols);
 		(*count)++;
-		current_line = get_next_line(fd);
+		current_line = get_next_line(ctx->fd);
 	}
 	if (current_line)
 		free(current_line);
+	ctx->rows = *count;
 	return (lines);
 }
 
 /**
  * @brief reads all map lines and stores them in a static array
- * @param fd file descriptor positioned at map content
- * @param first_line first line of map content
- * @param rows pointer to store number of rows
- * @param cols pointer to store number of columns
+ * @param ctx context containing file descriptor and first line
  * @return char** array of map lines, NULL on failure
  */
-char	**read_all_map_lines(int fd, char *first_line, int *rows, int *cols)
+char	**read_all_map_lines(t_map_read_ctx *ctx)
 {
 	char	**lines;
 	int		max_lines;
@@ -96,7 +93,7 @@ char	**read_all_map_lines(int fd, char *first_line, int *rows, int *cols)
 	if (!lines)
 		return (NULL);
 	init_lines_array(lines, max_lines);
-	lines[count] = ft_strdup(first_line);
+	lines[count] = ft_strdup(ctx->first_line);
 	if (!lines[count])
 	{
 		free(lines);
@@ -104,9 +101,10 @@ char	**read_all_map_lines(int fd, char *first_line, int *rows, int *cols)
 	}
 	process_line_length(lines[count], &max_cols);
 	count++;
-	read_remaining_lines(fd, lines, &count, max_lines, &max_cols);
-	*rows = count;
-	*cols = max_cols;
+	ctx->cols = 0;
+	read_remaining_lines(ctx, lines, &count, max_lines);
+	ctx->rows = count;
+	ctx->cols = max_cols;
 	return (lines);
 }
 
