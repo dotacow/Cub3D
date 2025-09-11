@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
 /*   Updated: 2025/09/11 13:29:40 by hbelaih          ###   ########.fr       */
@@ -57,6 +57,11 @@ int	main(int argc, char **argv)
 		return (errno);
 	}
 	dump_map(&game.map);
+	if(errno)
+	{
+		clean_map(&game.map);
+		return (errno);
+	}
 	game.mlx.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	game.mlx.img = mlx_new_image(game.mlx.mlx, WIDTH, HEIGHT);
 	if (game.mlx.mlx && game.mlx.img)
