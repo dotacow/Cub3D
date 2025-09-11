@@ -43,8 +43,8 @@ static int	load_texture(t_map_elements *map, char *key, char *val)
 
 static int	load_color(t_map_elements *map, char *key, char *val)
 {
-	char			**rgb;
-	int				color;
+	char	**rgb;
+	int		color;
 
 	color = 0;
 	rgb = ft_split(val, ',');
@@ -53,8 +53,7 @@ static int	load_color(t_map_elements *map, char *key, char *val)
 		free_split(rgb);
 		return (ENOMEM);
 	}
-	color  = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
-			ft_atoi(rgb[2]), 255);
+	color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
 	if (key[0] == 'F')
 		map->floor = color;
 	else

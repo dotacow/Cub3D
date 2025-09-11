@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:28:55 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/09/11 13:02:03 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 13:31:24 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
  */
 int	validate_line(char *str, t_elements *found)
 {
-	char	**keyval;
-	int		idx;
-	int		ret;
-	static int (*validators[])(char *, t_elements *) = {validate_no,
+	char		**keyval;
+	int			idx;
+	int			ret;
+	static int	(*validators[])(char *, t_elements *) = {validate_no,
 		validate_so, validate_we, validate_ea, validate_floor, validate_ceil};
-		
+
 	if (!*str)
 		return (1);
 	keyval = ft_split(str, ' ');

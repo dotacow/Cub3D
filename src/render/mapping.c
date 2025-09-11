@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:21:47 by yokitane          #+#    #+#             */
-/*   Updated: 2025/09/11 13:19:17 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 13:29:44 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	put_rgb(t_game *game, int x, int draw_start, int draw_end)
 }
 
 static void	calculate_wall_params(void *p[2], t_ray ray, int arr[2],
-			float farr[2])
+		float farr[2])
 {
 	t_game			*game;
 	mlx_texture_t	*tex;
@@ -68,8 +68,8 @@ static void	draw_wall(t_game *game, int screen_x, mlx_texture_t *tex, t_ray ray)
 		if (idx < 0 || idx >= (int)(tex->width * tex->height * 4))
 			break ;
 		mlx_put_pixel(game->mlx.img, screen_x, arr[0],
-			get_rgba(tex->	pixels[idx], tex->pixels[idx + 1],
-				tex->pixels[idx + 2], tex->pixels[idx + 3]));
+			get_rgba(tex->pixels[idx], tex->pixels[idx + 1], tex->pixels[idx
+				+ 2], tex->pixels[idx + 3]));
 		farr[0] += farr[1];
 		arr[0]++;
 	}
@@ -93,7 +93,6 @@ static mlx_texture_t	*get_wall_texture(t_game *game, t_ray ray)
 	}
 }
 
-
 void	map_ray(t_game *game, t_ray ray, int x)
 {
 	float			line_height;
@@ -102,11 +101,11 @@ void	map_ray(t_game *game, t_ray ray, int x)
 	int				draw_start;
 
 	if (ray.side == 0)
-		ray.perp_dist = (ray.map.x - game->map.player.pos.x
-			+ (1 - ray.step.x) / 2) / ray.dir.x;
+		ray.perp_dist = (ray.map.x - game->map.player.pos.x + (1 - ray.step.x)
+				/ 2) / ray.dir.x;
 	else
-		ray.perp_dist = (ray.map.y - game->map.player.pos.y
-			+ (1 - ray.step.y) / 2) / ray.dir.y;
+		ray.perp_dist = (ray.map.y - game->map.player.pos.y + (1 - ray.step.y)
+				/ 2) / ray.dir.y;
 	line_height = (float)game->mlx.img->height / ray.perp_dist;
 	draw_start = get_draw_start(line_height, game->mlx.img->height);
 	draw_end = get_draw_end(line_height, game->mlx.img->height);
@@ -114,5 +113,5 @@ void	map_ray(t_game *game, t_ray ray, int x)
 	if (!texture)
 		return ;
 	put_rgb(game, x, draw_start, draw_end);
-	draw_wall(game, x,texture, ray);
+	draw_wall(game, x, texture, ray);
 }
