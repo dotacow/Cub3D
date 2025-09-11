@@ -6,11 +6,38 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 17:03:06 by hbelaih           #+#    #+#             */
-/*   Updated: 2025/09/11 15:01:03 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 15:27:01 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+/**
+ * @brief
+ *
+ * @param itrs itrs[0] = i, itrs[1] = j, itrs[2] = rows, itrs[3] = cols
+ * @param valid
+ * @param temp_map
+ * @return void
+ */
+static void	determine(int *itrs, int *valid, char c, char **temp_map)
+{
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	{
+		if (itrs[0] == 0 || temp_map[itrs[0] - 1][itrs[1]] == '\0'
+			|| temp_map[itrs[0] - 1][itrs[1]] == ' ')
+			*valid = 0;
+		if (itrs[0] == itrs[2] - 1 || temp_map[itrs[0] + 1][itrs[1]] == '\0'
+			|| temp_map[itrs[0] + 1][itrs[1]] == ' ')
+			*valid = 0;
+		if (itrs[1] == 0 || temp_map[itrs[0]][itrs[1] - 1] == '\0'
+			|| temp_map[itrs[0]][itrs[1] - 1] == ' ')
+			*valid = 0;
+		if (itrs[1] == itrs[3] - 1 || temp_map[itrs[0]][itrs[1] + 1] == '\0'
+			|| temp_map[itrs[0]][itrs[1] + 1] == ' ')
+			*valid = 0;
+	}
+}
 
 /**
  * @brief validate that all accessible areas are properly enclosed by walls
@@ -25,27 +52,17 @@ static int	check_map_interior(char **temp_map, int rows, int cols, int *valid)
 	int		i;
 	int		j;
 
-       i = -1;
-       while (++i < rows && *valid)
-       {
-	       j = -1;
-	       while (++j < cols && *valid)
-	       {
-		       c = temp_map[i][j];
-		       if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		       {
-			       if (i == 0 || temp_map[i - 1][j] == '\0' || temp_map[i - 1][j] == ' ')
-				       *valid = 0;
-			       if (i == rows - 1 || temp_map[i + 1][j] == '\0' || temp_map[i + 1][j] == ' ')
-				       *valid = 0;
-			       if (j == 0 || temp_map[i][j - 1] == '\0' || temp_map[i][j - 1] == ' ')
-				       *valid = 0;
-			       if (j == cols - 1 || temp_map[i][j + 1] == '\0' || temp_map[i][j + 1] == ' ')
-				       *valid = 0;
-		       }
-	       }
-       }
-       return (*valid);
+	i = -1;
+	while (++i < rows && *valid)
+	{
+		j = -1;
+		while (++j < cols && *valid)
+		{
+			c = temp_map[i][j];
+			determine((int [4]){i, j, rows, cols}, valid, c, temp_map);
+		}
+	}
+	return (*valid);
 }
 
 static int	validate_map_temp(char **map_copy, int rows, int cols,
