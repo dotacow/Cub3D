@@ -6,7 +6,7 @@
 /*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/09/10 13:44:10 by hbelaih          ###   ########.fr       */
+/*   Updated: 2025/09/11 13:12:45 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ typedef struct s_map_elements
 {
 	int				rows;
 	int				cols;
-	unsigned int	floor;
-	unsigned int	ceiling;
+	int				floor;
+	int				ceiling;
 	char			*map;
 	char			*line;
 	mlx_texture_t	*north;
