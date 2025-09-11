@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:56:37 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 15:08:27 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/11 13:07:21 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include <errno.h>
 
 int	validate_and_init(char *path, t_map_elements *map)
 {
@@ -51,6 +52,11 @@ int	main(int argc, char **argv)
 	if (!validate_args(argc, argv))
 		return (1);
 	errno = validate_and_init(argv[1],&game.map);
+	if (errno)
+	{
+		clean_map(&game.map);
+		return (errno);
+	}
 	dump_map(&game.map);
 	game.mlx.mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", false);
 	game.mlx.img = mlx_new_image(game.mlx.mlx, WIDTH, HEIGHT);

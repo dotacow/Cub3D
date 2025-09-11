@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 19:19:48 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 20:11:01 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/11 13:12:45 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,23 @@ typedef struct s_player
 	t_point dir;
 	t_point plane;
 }				t_player;
+
+typedef struct s_flood_ctx {
+	char **map;
+	int rows;
+	int cols;
+	int player_row;
+	int player_col;
+}				t_flood_ctx;
+
+
+typedef struct s_map_read_ctx {
+    int fd;
+    char *first_line;
+    int rows;
+    int cols;
+} t_map_read_ctx;
+
 /**
  * @brief: contains the successfully validated map elements
  * @param map: flat matrix representing the map, 1 for wall, everything else empty
@@ -99,8 +116,8 @@ typedef struct s_map_elements
 {
 	int				rows;
 	int				cols;
-	int	floor;
-	int	ceiling;
+	int				floor;
+	int				ceiling;
 	char			*map;
 	char			*line;
 	mlx_texture_t	*north;
@@ -135,16 +152,14 @@ int					is_valid_map(int fd);
 // map parser functions
 int					validate_line(char *str, t_elements *found);
 int					is_map_content(char *line);
-int					setup_map_data(char *line, int fd, char ***lines,
-						char ***map_copy, int *rows, int *cols);
+int					setup_map_data(t_map_read_ctx *ctx, char ***lines, char ***map_copy);
 int					validate_map_content(char *line, t_elements *found, int fd);
 // map reader functions
 int					process_line_length(char *line, int *max_cols);
 void				init_lines_array(char **lines, int max_lines);
-char				**read_remaining_lines(int fd, char **lines, int *count,
-						int max_lines, int *max_cols);
-char				**read_all_map_lines(int fd, char *first_line, int *rows,
-						int *cols);
+char				**read_remaining_lines(t_map_read_ctx *ctx, char **lines, int *count,
+						int max_lines);
+char				**read_all_map_lines(t_map_read_ctx *ctx);
 int					process_map_validation(char **lines, char **map_copy,
 						int rows, int cols);
 // map memory functions
@@ -154,10 +169,8 @@ void				fill_row(char **map_copy, char **lines, int row, int cols);
 char				**create_2d_map_copy(char **lines, int rows, int cols);
 void				free_lines(char **lines, int count);
 // flood fill functions
-void				flood_fill(char **map, int row, int col, int total_rows,
-						int total_cols);
-int					find_player_position(char **map, int rows, int cols,
-						int *player_row, int *player_col);
+void				flood_fill(t_flood_ctx *ctx, int row, int col);
+int					find_player_position(t_flood_ctx *ctx);
 void				free_temp_map(char **temp_map, int rows);
 char				**create_temp_map(char **map_copy, int rows, int cols);
 int					check_boundary_breach(char **temp_map, int rows, int cols);
@@ -169,6 +182,8 @@ int					ft_isspace(char c);
 void				trim_whitespace(char *str);
 void				check_name(char *name);
 int					is_rgb_format(char *str);
+int					has_invalid_map_char(char **map);
+
 // frequency array utils
 void				init_found_arr(t_elements *found);
 int					is_all_found(t_elements *found);

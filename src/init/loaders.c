@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loaders.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 21:32:21 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 20:10:51 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/11 13:16:13 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	load_texture(t_map_elements *map, char *key, char *val)
 static int	load_color(t_map_elements *map, char *key, char *val)
 {
 	char			**rgb;
-	int	color;
+	int				color;
 
 	color = 0;
 	rgb = ft_split(val, ',');
@@ -53,7 +53,7 @@ static int	load_color(t_map_elements *map, char *key, char *val)
 		free_split(rgb);
 		return (ENOMEM);
 	}
-	color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
+	color  = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]),
 			ft_atoi(rgb[2]), 255);
 	if (key[0] == 'F')
 		map->floor = color;

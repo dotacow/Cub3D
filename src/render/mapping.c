@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapping.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: hbelaih <hbelaih@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:21:47 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 20:07:35 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/11 13:19:17 by hbelaih          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	draw_wall(t_game *game, int screen_x, mlx_texture_t *tex, t_ray ray)
 		if (idx < 0 || idx >= (int)(tex->width * tex->height * 4))
 			break ;
 		mlx_put_pixel(game->mlx.img, screen_x, arr[0],
-			get_rgba(tex->pixels[idx], tex->pixels[idx + 1],
+			get_rgba(tex->	pixels[idx], tex->pixels[idx + 1],
 				tex->pixels[idx + 2], tex->pixels[idx + 3]));
 		farr[0] += farr[1];
 		arr[0]++;
