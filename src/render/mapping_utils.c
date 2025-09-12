@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 15:35:46 by yokitane          #+#    #+#             */
-/*   Updated: 2025/08/30 15:36:43 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:30:59 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ int	get_draw_start(float line_height, int height)
 	return (draw_start);
 }
 
+/**
+ * @brief what column of texture to get
+ *
+ * @param game
+ * @param ray
+ * @param texture
+ * @return int col in tex
+ */
 int	get_tex_x(t_game *game, t_ray ray, mlx_texture_t *texture)
 {
 	float	wall_x;
@@ -41,7 +49,7 @@ int	get_tex_x(t_game *game, t_ray ray, mlx_texture_t *texture)
 		wall_x = game->map.player.pos.y + ray.perp_dist * ray.dir.y;
 	else
 		wall_x = game->map.player.pos.x + ray.perp_dist * ray.dir.x;
-	wall_x -= floor(wall_x);
+	wall_x -= floorf(wall_x);
 	tex_x = (int)(wall_x * (float)texture->width);
 	if ((ray.side == 0 && ray.dir.x > 0) || (ray.side == 1 && ray.dir.y < 0))
 		tex_x = texture->width - tex_x - 1;

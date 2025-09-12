@@ -6,7 +6,7 @@
 /*   By: yokitane <yokitane@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 18:21:47 by yokitane          #+#    #+#             */
-/*   Updated: 2025/09/11 15:54:56 by yokitane         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:24:50 by yokitane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ static void	put_rgb(t_game *game, int x, int draw_start, int draw_end)
 		y++;
 	}
 }
-
+/**
+ * @brief projection function (3d --> 2d)
+ *
+ * @param arr arr[0] --> draw start, arr[1] --> end
+ * @param farr farr[1] -->texture space per pixel, farr[0] -->  y offset from true wall
+ */
 static void	calculate_wall_params(void *p[2], t_ray ray, int arr[2],
 		float farr[2])
 {
@@ -41,7 +46,7 @@ static void	calculate_wall_params(void *p[2], t_ray ray, int arr[2],
 	tex = (mlx_texture_t *)p[1];
 	wall_height = (float)game->mlx.img->height / ray.perp_dist;
 	farr[1] = (float)tex->height / wall_height;
-	arr[0] = (int)(-wall_height / 2.0f + game->mlx.img->height / 2.0f);
+	arr[0] = (int)(wall_height / 2.0f - game->mlx.img->height / 2.0f);
 	if (arr[0] < 0)
 		arr[0] = 0;
 	arr[1] = (int)(wall_height / 2.0f + game->mlx.img->height / 2.0f);
